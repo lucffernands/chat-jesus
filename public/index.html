@@ -1,83 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Converse com Jesus</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
-      text-align: center;
-    }
-    #chat {
-      max-width: 600px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .message {
-      text-align: left;
-      margin-bottom: 10px;
-    }
-    .message.user {
-      text-align: right;
-      color: blue;
-    }
-    .message.bot {
-      text-align: left;
-      color: green;
-    }
-    input, button {
-      padding: 10px;
-      font-size: 16px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Converse com Jesus</h1>
-  <div id="chat"></div>
-  <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
-  <button onclick="sendMessage()">Enviar</button>
+  <div class="container">
+    <h1>Converse com Jesus</h1>
+    <div class="chat-box" id="chat-box"></div>
+
+    <form id="chat-form">
+      <input type="text" id="message-input" placeholder="Digite sua mensagem..." required />
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div class="loading" id="loading" style="display: none;">
+      <div class="spinner"></div>
+      Jesus está refletindo...
+    </div>
+  </div>
 
   <script>
-    async function sendMessage() {
-      const input = document.getElementById("messageInput");
+    const chatBox = document.getElementById('chat-box');
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('message-input');
+    const loading = document.getElementById('loading');
+
+    function addMessage(sender, text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = sender;
+      messageDiv.textContent = `${sender === 'user' ? 'Você' : 'Jesus'}: ${text}`;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       const message = input.value.trim();
       if (!message) return;
 
-      appendMessage("Você", message, "user");
-      input.value = "";
+      addMessage('user', message);
+      input.value = '';
+      loading.style.display = 'block';
 
       try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+        const response = await fetch('/api/message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message })
         });
 
         const data = await response.json();
         if (data.reply) {
-          appendMessage("Jesus", data.reply, "bot");
+          addMessage('jesus', data.reply);
         } else {
-          appendMessage("Jesus", "Erro ao se comunicar com o servidor.", "bot");
+          addMessage('jesus', 'Erro: Resposta vazia');
         }
-      } catch (err) {
-        appendMessage("Jesus", "Erro ao se comunicar com o servidor (Erro HTTP 500)", "bot");
+      } catch (error) {
+        addMessage('jesus', 'Erro ao se comunicar com o servidor (Erro HTTP 500)');
+      } finally {
+        loading.style.display = 'none';
       }
-    }
-
-    function appendMessage(sender, text, cls) {
-      const div = document.createElement("div");
-      div.className = `message ${cls}`;
-      div.textContent = `${sender}: ${text}`;
-      document.getElementById("chat").appendChild(div);
-    }
+    });
   </script>
 </body>
 </html>
