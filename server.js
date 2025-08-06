@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fetch = require("node-fetch");
-
 require("dotenv").config();
 
 const app = express();
@@ -16,10 +15,14 @@ app.post("/api/chat", async (req, res) => {
   const userMessage = req.body.message;
 
   if (!userMessage) {
+    console.warn("Mensagem vazia recebida no corpo da requisição.");
     return res.status(400).json({ error: "Mensagem do usuário ausente." });
   }
 
   try {
+    console.log("Mensagem recebida do usuário:", userMessage);
+    console.log("Usando chave:", process.env.OPENROUTER_API_KEY ? "DEFINIDA" : "NÃO DEFINIDA");
+
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -45,18 +48,27 @@ app.post("/api/chat", async (req, res) => {
 
     const data = await response.json();
 
+    if (!response.ok) {
+      console.error("Erro HTTP da OpenRouter:", response.status, data);
+      return res.status(response.status).json({ error: `Erro OpenRouter: ${data?.error?.message || "Resposta inválida"}` });
+    }
+
     if (data.error) {
+      console.error("Erro retornado pela OpenRouter:", data.error);
       return res.status(500).json({ error: data.error.message });
     }
 
     const reply = data.choices?.[0]?.message?.content;
 
     if (!reply) {
+      console.error("Resposta da IA sem conteúdo:", data);
       return res.status(500).json({ error: "Resposta inválida da IA." });
     }
 
+    console.log("Resposta da IA:", reply);
     res.json({ reply });
   } catch (error) {
+    console.error("Erro no servidor:", error.message);
     res.status(500).json({ error: "Erro ao se comunicar com a IA." });
   }
 });
