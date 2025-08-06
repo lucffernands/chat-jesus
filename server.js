@@ -1,61 +1,69 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const fetch = require('node-fetch');
 require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const fetch = require('node-fetch');
 
 const app = express();
-const PORT = process.env.PORT || 10000;
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const port = process.env.PORT || 10000;
 
-app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 app.use(express.static('public'));
 
-app.post('/chat', async (req, res) => {
+app.post('/api/message', async (req, res) => {
   const message = req.body.message;
-  console.log('Mensagem recebida:', message);
+  console.log("Mensagem recebida:", message);
 
-  if (!OPENROUTER_API_KEY) {
-    console.error('Chave da OpenRouter não definida');
-    return res.status(500).json({ error: 'Chave da OpenRouter não definida' });
+  const apiKey = process.env.OPENROUTER_API_KEY;
+
+  if (!apiKey) {
+    console.error("❌ API key não definida.");
+    return res.status(500).json({ error: "API key não configurada." });
   }
 
-  console.log('Usando chave:', OPENROUTER_API_KEY ? 'DEFINIDA' : 'NÃO DEFINIDA');
+  console.log("Usando chave:", apiKey ? "DEFINIDA" : "NÃO DEFINIDA");
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-chat',
+        model: 'deepseek-ai/deepseek-v3', // modelo correto e gratuito
         messages: [
           {
             role: 'system',
-            content: 'Você é Jesus. Responda sempre com compaixão, amor e sabedoria, como um guia espiritual que oferece conforto e direção.'
+            content: 'Você é Jesus e responderá com sabedoria, compaixão e amor incondicional.'
           },
-          { role: 'user', content: message }
+          {
+            role: 'user',
+            content: message
+          }
         ]
       })
     });
 
     const data = await response.json();
-    console.log('Resposta da OpenRouter:', JSON.stringify(data, null, 2));
+    console.log("Resposta da OpenRouter:", JSON.stringify(data, null, 2));
 
-    if (data.choices && data.choices.length > 0) {
-      const reply = data.choices[0].message.content;
-      res.json({ reply });
-    } else {
-      res.json({ reply: 'Jesus: Ocorreu um erro ao interpretar a resposta.' });
+    if (data.error) {
+      throw new Error(data.error.message || "Erro desconhecido da API");
     }
 
+    const reply = data.choices?.[0]?.message?.content;
+    if (!reply) {
+      throw new Error("Resposta inválida da IA");
+    }
+
+    res.json({ reply });
   } catch (error) {
-    console.error('Erro ao se comunicar com OpenRouter:', error);
-    res.status(500).json({ error: 'Erro ao se comunicar com OpenRouter' });
+    console.error("Erro ao responder:", error.message);
+    res.status(500).json({ error: "Jesus: Ocorreu um erro ao interpretar a resposta" });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
