@@ -7,7 +7,7 @@ function addMessage(sender, text) {
   const messageDiv = document.createElement('div');
   messageDiv.className = sender;
 
-  const senderName = sender === 'user' ? 'Você' : '<strong>Jesus</strong>';
+  const senderName = sender === 'user' ? '<strong>Você</strong>' : '<strong>Jesus</strong>';
   messageDiv.innerHTML = `${senderName}: ${text}`;
 
   chatBox.appendChild(messageDiv);
