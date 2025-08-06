@@ -33,7 +33,7 @@ app.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: "Você é Jesus Cristo. Responda sempre com sabedoria, paz, empatia e trechos da Bíblia. Seja acolhedor e reconfortante."
+            content: "Você é Jesus e responderá com sabedoria, compaixão e amor incondicional."
           },
           {
             role: "user",
@@ -43,23 +43,21 @@ app.post("/api/chat", async (req, res) => {
       })
     });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      return res.status(response.status).json({ error: `Erro HTTP ${response.status}`, details: errText });
-    }
-
     const data = await response.json();
 
-    const assistantMessage = data.choices?.[0]?.message?.content;
-
-    if (!assistantMessage) {
-      return res.status(500).json({ error: "Resposta do modelo ausente." });
+    if (data.error) {
+      return res.status(500).json({ error: data.error.message });
     }
 
-    res.json({ message: assistantMessage });
+    const reply = data.choices?.[0]?.message?.content;
+
+    if (!reply) {
+      return res.status(500).json({ error: "Resposta inválida da IA." });
+    }
+
+    res.json({ reply });
   } catch (error) {
-    console.error("Erro ao acessar o OpenRouter:", error);
-    res.status(500).json({ error: "Erro interno no servidor." });
+    res.status(500).json({ error: "Erro ao se comunicar com a IA." });
   }
 });
 
