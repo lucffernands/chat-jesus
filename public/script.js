@@ -41,4 +41,31 @@ form.addEventListener('submit', async (e) => {
   } finally {
     loading.style.display = 'none';
   }
+
+  const voiceBtn = document.getElementById('voice-btn');
+  
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = 'pt-BR';
+  recognition.interimResults = false;
+
+  voiceBtn.addEventListener('click', () => {
+    recognition.start();
+    voiceBtn.textContent = '🎙️'; // muda ícone enquanto fala
+  });
+
+  recognition.addEventListener('result', (event) => {
+    const transcript = event.results[0][0].transcript;
+    input.value = transcript;
+  });
+
+  recognition.addEventListener('end', () => {
+    voiceBtn.textContent = '🎤'; // volta ao ícone original
+  });
+} else {
+  voiceBtn.disabled = true;
+  voiceBtn.title = "Reconhecimento de voz não suportado neste navegador.";
+    }
 });
