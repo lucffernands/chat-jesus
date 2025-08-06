@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Converse com Jesus</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #chat { max-height: 400px; overflow-y: auto; margin-bottom: 10px; }
+    .msg { margin: 5px 0; }
+    .you { font-weight: bold; }
+    .jesus { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Chat com Jesus</h1>
+  <div id="chat"></div>
+  <input id="msg" placeholder="Sua pergunta..." />
+  <button onclick="send()">Enviar</button>
+
+  <script>
+    async function send() {
+      const input = document.getElementById('msg');
+      const chat = document.getElementById('chat');
+      const userText = input.value;
+      input.value = '';
+
+      chat.innerHTML += `<div class="msg you">Você: ${userText}</div>`;
+
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userText })
+      });
+      const data = await res.json();
+
+      chat.innerHTML += `<div class="msg jesus">Jesus: ${data.reply}</div>`;
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
