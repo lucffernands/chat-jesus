@@ -33,7 +33,7 @@ app.post('/api/message', async (req, res) => {
         'X-Title': 'Chat com Jesus'
       },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v3',
+        model: 'deepseek/deepseek-chat-v3-0324',
         messages: [
           {
             role: 'system',
