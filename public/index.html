@@ -1,52 +1,92 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Converse com Jesus</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background-color: #f9f9f9; }
-    #chat { max-height: 400px; overflow-y: auto; margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; background: #fff; }
-    .msg { margin: 5px 0; }
-    .you { font-weight: bold; }
-    .jesus { color: green; }
-    input, button { padding: 10px; font-size: 16px; }
-    input { width: 70%; }
-    button { width: 28%; margin-left: 2%; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #3b3b3b;
+    }
+    #chat {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .message {
+      margin: 10px 0;
+      text-align: left;
+    }
+    .user {
+      font-weight: bold;
+      color: #333;
+    }
+    .bot {
+      color: #006400;
+      margin-left: 20px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    button {
+      cursor: pointer;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
-  <h1>Chat com Jesus</h1>
+  <h1>Converse com Jesus</h1>
   <div id="chat"></div>
-  <input id="msg" placeholder="Sua pergunta..." />
-  <button onclick="send()">Enviar</button>
+  <input id="messageInput" type="text" placeholder="Digite sua mensagem..." />
+  <button onclick="sendMessage()">Enviar</button>
 
   <script>
-    async function send() {
-      const input = document.getElementById('msg');
+    async function sendMessage() {
+      const input = document.getElementById('messageInput');
       const chat = document.getElementById('chat');
-      const userText = input.value.trim();
-      if (!userText) return;
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
 
+      chat.innerHTML += `<div class="message"><span class="user">Você:</span> ${userMessage}</div>`;
       input.value = '';
-      chat.innerHTML += `<div class="msg you">Você: ${userText}</div>`;
 
       try {
-        const res = await fetch('/chat', {
+        const response = await fetch('/api/message', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userText })
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: userMessage })
         });
 
-        if (!res.ok) {
-          throw new Error(`Erro HTTP ${res.status}`);
+        if (!response.ok) {
+          throw new Error(`Erro HTTP ${response.status}`);
         }
 
-        const data = await res.json();
-        const resposta = data.reply || "Jesus está em silêncio no momento.";
-        chat.innerHTML += `<div class="msg jesus">Jesus: ${resposta}</div>`;
-      } catch (err) {
-        console.error("Erro ao enviar:", err);
-        chat.innerHTML += `<div class="msg jesus">Jesus: Ocorreu um erro. ${err.message}</div>`;
+        const data = await response.json();
+        const reply = data.reply || data.error || 'Jesus: Ocorreu um erro inesperado.';
+
+        chat.innerHTML += `<div class="message"><span class="bot">Jesus:</span> ${reply}</div>`;
+      } catch (error) {
+        console.error(error);
+        chat.innerHTML += `<div class="message"><span class="bot">Jesus:</span> Erro ao se comunicar com o servidor (${error.message})</div>`;
       }
 
       chat.scrollTop = chat.scrollHeight;
