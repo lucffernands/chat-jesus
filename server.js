@@ -1,61 +1,61 @@
-require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+require('dotenv').config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+const PORT = process.env.PORT || 10000;
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.post('/chat', async (req, res) => {
-  const userMessage = req.body.message;
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const message = req.body.message;
+  console.log('Mensagem recebida:', message);
 
-  console.log('Mensagem recebida:', userMessage);
-  console.log('Usando chave:', apiKey ? 'DEFINIDA' : 'NÃO DEFINIDA');
+  if (!OPENROUTER_API_KEY) {
+    console.error('Chave da OpenRouter não definida');
+    return res.status(500).json({ error: 'Chave da OpenRouter não definida' });
+  }
+
+  console.log('Usando chave:', OPENROUTER_API_KEY ? 'DEFINIDA' : 'NÃO DEFINIDA');
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://chat-jesus.onrender.com',
-        'X-Title': 'Chat com Jesus'
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'openrouter/deepseek-chat',
+        model: 'deepseek-ai/deepseek-chat',
         messages: [
           {
             role: 'system',
-            content: 'Você é Jesus. Responda com sabedoria, amor e empatia, guiando o usuário com compaixão.'
+            content: 'Você é Jesus. Responda sempre com compaixão, amor e sabedoria, como um guia espiritual que oferece conforto e direção.'
           },
-          {
-            role: 'user',
-            content: userMessage
-          }
+          { role: 'user', content: message }
         ]
       })
     });
 
     const data = await response.json();
-    console.log('Resposta da OpenRouter:', data);
+    console.log('Resposta da OpenRouter:', JSON.stringify(data, null, 2));
 
     if (data.choices && data.choices.length > 0) {
       const reply = data.choices[0].message.content;
       res.json({ reply });
     } else {
-      res.json({ reply: 'Jesus: Não consegui entender sua pergunta no momento.' });
+      res.json({ reply: 'Jesus: Ocorreu um erro ao interpretar a resposta.' });
     }
 
   } catch (error) {
-    console.error('Erro ao chamar a API:', error);
-    res.status(500).json({ reply: 'Jesus: Houve um erro ao processar sua pergunta.' });
+    console.error('Erro ao se comunicar com OpenRouter:', error);
+    res.status(500).json({ error: 'Erro ao se comunicar com OpenRouter' });
   }
 });
 
-const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
