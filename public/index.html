@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <title>Converse com Jesus</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    #chat { max-height: 400px; overflow-y: auto; margin-bottom: 10px; }
+    body { font-family: sans-serif; padding: 20px; background-color: #f9f9f9; }
+    #chat { max-height: 400px; overflow-y: auto; margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; background: #fff; }
     .msg { margin: 5px 0; }
     .you { font-weight: bold; }
     .jesus { color: green; }
+    input, button { padding: 10px; font-size: 16px; }
+    input { width: 70%; }
+    button { width: 28%; margin-left: 2%; }
   </style>
 </head>
 <body>
@@ -21,21 +24,18 @@
     async function send() {
       const input = document.getElementById('msg');
       const chat = document.getElementById('chat');
-      const userText = input.value;
-      input.value = '';
+      const userText = input.value.trim();
+      if (!userText) return;
 
+      input.value = '';
       chat.innerHTML += `<div class="msg you">Você: ${userText}</div>`;
 
-      const res = await fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userText })
-      });
-      const data = await res.json();
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userText })
+        });
 
-      chat.innerHTML += `<div class="msg jesus">Jesus: ${data.reply}</div>`;
-      chat.scrollTop = chat.scrollHeight;
-    }
-  </script>
-</body>
-</html>
+        if (!res.ok) {
+          throw new Error
