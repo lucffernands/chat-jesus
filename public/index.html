@@ -38,4 +38,19 @@
         });
 
         if (!res.ok) {
-          throw new Error
+          throw new Error(`Erro HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        const resposta = data.reply || "Jesus está em silêncio no momento.";
+        chat.innerHTML += `<div class="msg jesus">Jesus: ${resposta}</div>`;
+      } catch (err) {
+        console.error("Erro ao enviar:", err);
+        chat.innerHTML += `<div class="msg jesus">Jesus: Ocorreu um erro. ${err.message}</div>`;
+      }
+
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
