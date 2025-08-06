@@ -6,7 +6,10 @@ const loading = document.getElementById('loading');
 function addMessage(sender, text) {
   const messageDiv = document.createElement('div');
   messageDiv.className = sender;
-  messageDiv.textContent = `${sender === 'user' ? 'Você' : 'Jesus'}: ${text}`;
+
+  const senderName = sender === 'user' ? 'Você' : '<strong>Jesus</strong>';
+  messageDiv.innerHTML = `${senderName}: ${text}`;
+
   chatBox.appendChild(messageDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
