@@ -61,7 +61,7 @@ app.post('/api/message', async (req, res) => {
 
     res.json({ reply });
   } catch (error) {
-    console.error("Erro ao responder:", error.message);
+    console.error("❌ Erro ao responder:", error);
     res.status(500).json({ error: "Jesus: Ocorreu um erro ao interpretar a resposta" });
   }
 });
