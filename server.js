@@ -28,10 +28,12 @@ app.post('/api/message', async (req, res) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Referer': 'https://chat-jesus.onrender.com/',
+        'X-Title': 'Chat com Jesus'
       },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v3', // modelo correto e gratuito
+        model: 'deepseek-ai/deepseek-v3',
         messages: [
           {
             role: 'system',
