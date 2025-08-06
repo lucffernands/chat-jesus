@@ -11,6 +11,9 @@ app.use(express.static("public"));
 app.post("/chat", async (req, res) => {
   const { message } = req.body;
 
+  console.log("Mensagem recebida:", message);
+  console.log("Usando chave:", process.env.DEEPSEEK_API_KEY ? "DEFINIDA" : "NÃO DEFINIDA");
+
   try {
     const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
       method: "POST",
@@ -28,18 +31,14 @@ app.post("/chat", async (req, res) => {
     });
 
     const data = await response.json();
+    console.log("Resposta da DeepSeek:", data);
 
-    if (!data.choices || !data.choices[0]) {
-      console.error("Erro na resposta da API DeepSeek:", JSON.stringify(data));
-      return res.status(500).json({ reply: "Erro na resposta: " + JSON.stringify(data) });
-    }
-
-    const reply = data.choices[0].message.content;
+    const reply = data.choices?.[0]?.message?.content || "Erro ao interpretar a resposta.";
     res.json({ reply });
 
   } catch (err) {
-    console.error("Erro na requisição:", err);
-    res.status(500).json({ reply: "Erro de conexão com a API." });
+    console.error("Erro ao chamar a API da DeepSeek:", err);
+    res.status(500).json({ reply: "Erro interno no servidor. Por favor, tente novamente mais tarde." });
   }
 });
 
