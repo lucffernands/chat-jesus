@@ -11,9 +11,6 @@
       padding: 20px;
       text-align: center;
     }
-    h1 {
-      color: #3b3b3b;
-    }
     #chat {
       max-width: 600px;
       margin: 30px auto;
@@ -23,73 +20,63 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     .message {
-      margin: 10px 0;
       text-align: left;
+      margin-bottom: 10px;
     }
-    .user {
-      font-weight: bold;
-      color: #333;
+    .message.user {
+      text-align: right;
+      color: blue;
     }
-    .bot {
-      color: #006400;
-      margin-left: 20px;
+    .message.bot {
+      text-align: left;
+      color: green;
     }
     input, button {
       padding: 10px;
       font-size: 16px;
-      margin-top: 10px;
-    }
-    button {
-      cursor: pointer;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-    }
-    button:hover {
-      background-color: #45a049;
     }
   </style>
 </head>
 <body>
   <h1>Converse com Jesus</h1>
   <div id="chat"></div>
-  <input id="messageInput" type="text" placeholder="Digite sua mensagem..." />
+  <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
   <button onclick="sendMessage()">Enviar</button>
 
   <script>
     async function sendMessage() {
-      const input = document.getElementById('messageInput');
-      const chat = document.getElementById('chat');
-      const userMessage = input.value.trim();
-      if (!userMessage) return;
+      const input = document.getElementById("messageInput");
+      const message = input.value.trim();
+      if (!message) return;
 
-      chat.innerHTML += `<div class="message"><span class="user">Você:</span> ${userMessage}</div>`;
-      input.value = '';
+      appendMessage("Você", message, "user");
+      input.value = "";
 
       try {
-        const response = await fetch('/api/message', {
-          method: 'POST',
+        const response = await fetch("/api/chat", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
           },
-          body: JSON.stringify({ message: userMessage })
+          body: JSON.stringify({ message })
         });
 
-        if (!response.ok) {
-          throw new Error(`Erro HTTP ${response.status}`);
-        }
-
         const data = await response.json();
-        const reply = data.reply || data.error || 'Jesus: Ocorreu um erro inesperado.';
-
-        chat.innerHTML += `<div class="message"><span class="bot">Jesus:</span> ${reply}</div>`;
-      } catch (error) {
-        console.error(error);
-        chat.innerHTML += `<div class="message"><span class="bot">Jesus:</span> Erro ao se comunicar com o servidor (${error.message})</div>`;
+        if (data.reply) {
+          appendMessage("Jesus", data.reply, "bot");
+        } else {
+          appendMessage("Jesus", "Erro ao se comunicar com o servidor.", "bot");
+        }
+      } catch (err) {
+        appendMessage("Jesus", "Erro ao se comunicar com o servidor (Erro HTTP 500)", "bot");
       }
+    }
 
-      chat.scrollTop = chat.scrollHeight;
+    function appendMessage(sender, text, cls) {
+      const div = document.createElement("div");
+      div.className = `message ${cls}`;
+      div.textContent = `${sender}: ${text}`;
+      document.getElementById("chat").appendChild(div);
     }
   </script>
 </body>
