@@ -38,6 +38,8 @@ h1 {
   border-radius: 12px;
   background: #f9f9f9;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Mensagens */
@@ -60,12 +62,16 @@ h1 {
 .jesus {
   background: #fef9c3;
   border-left: 4px solid #facc15;
+  font-weight: bold;
 }
 
 /* Formulário */
-form {
+form#chat-form {
   display: flex;
+  flex-wrap: nowrap;
   gap: 10px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 input[type="text"] {
@@ -76,18 +82,23 @@ input[type="text"] {
   font-size: 1rem;
 }
 
-button {
-  padding: 10px 20px;
+/* Botões harmoniosos */
+button[type="submit"],
+button#voice-button {
+  padding: 10px 16px;
   border: none;
-  background: #2563eb;
-  color: white;
   border-radius: 12px;
-  cursor: pointer;
   font-size: 1rem;
+  color: white;
+  background: #2563eb;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.3s;
 }
 
-button:hover {
+button[type="submit"]:hover,
+button#voice-button:hover {
   background: #1d4ed8;
 }
 
@@ -97,6 +108,7 @@ button:hover {
   text-align: center;
   font-style: italic;
   color: #555;
+  font-weight: bold;
 }
 
 /* Spinner */
@@ -121,8 +133,18 @@ button:hover {
     padding: 15px;
   }
 
-  input[type="text"],
-  button {
+  form#chat-form {
+    flex-wrap: wrap;
+  }
+
+  input[type="text"] {
+    font-size: 0.9rem;
+  }
+
+  button[type="submit"],
+  button#voice-button {
+    width: 100%;
+    margin-top: 8px;
     font-size: 0.9rem;
   }
 }
