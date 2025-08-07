@@ -68,41 +68,43 @@ h1 {
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
+  text-align: center;
+  margin-top: 20px;
 }
 
 input[type="text"] {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 20px;
+  padding: 10px;
+  width: 90%;
+  max-width: 400px;
   border: 1px solid #ccc;
-  font-size: 1rem;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .button-group {
   display: flex;
-  gap: 1rem;
   justify-content: center;
-  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 button {
-  padding: 0.8rem 2rem;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1E50FF;
+  color: white;
   border: none;
   border-radius: 20px;
-  background-color: #1e40af;
-  color: white;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
-  flex: 1;
+  min-width: 120px;
+  max-width: 150px;
+  flex: 1 1 auto;
 }
 
 button:hover {
-  background-color: #3b82f6;
+  background-color: #003cb3;
 }
 
 @media (max-width: 600px) {
