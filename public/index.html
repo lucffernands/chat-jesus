@@ -9,22 +9,24 @@
 <body>
   <div class="container">
     <h1>Converse com Jesus</h1>
-    <div class="chat-box" id="chat-box"></div>
     
+    <div class="chat-box" id="chat-box"></div>
+
     <form id="chat-form">
-  <input type="text" id="message-input" placeholder="Digite sua mensagem..." required />
-  <div class="button-group">
-    <button type="submit">⌨️ Enviar</button>
-    <button type="button" id="voice-btn" aria-label="Falar com Jesus">🎙️ Fale</button>
-  </div>
+      <input type="text" id="message-input" placeholder="Digite sua mensagem..." required />
+      <div class="button-group">
+        <button type="submit">⌨️ Enviar</button>
+        <button type="button" id="voice-btn" aria-label="Falar com Jesus">🎙️ Fale</button>
+      </div>
     </form>
 
     <div class="loading" id="loading" style="display: none;">
-  <div class="spinner"></div>
-  <span><strong>Jesus</strong> quer falar com você...</span>
+      <div class="spinner"></div>
+      <span><strong>Jesus</strong> quer falar com você...</span>
     </div>
+  </div> <!-- Fim do .container -->
 
   <!-- JavaScript externo -->
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
