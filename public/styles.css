@@ -38,8 +38,6 @@ h1 {
   border-radius: 12px;
   background: #f9f9f9;
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
 }
 
 /* Mensagens */
@@ -66,39 +64,37 @@ h1 {
 }
 
 /* Formulário */
-form#chat-form {
+form {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
   gap: 10px;
+  justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 input[type="text"] {
-  flex: 1;
+  flex: 1 1 auto;
   padding: 10px 15px;
   border: 1px solid #ccc;
   border-radius: 12px;
   font-size: 1rem;
+  min-width: 200px;
 }
 
-/* Botões harmoniosos */
-button[type="submit"],
-button#voice-button {
-  padding: 10px 16px;
+/* Botões (enviar e voz) */
+button, #voice-button {
+  padding: 10px 20px;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  color: white;
   background: #2563eb;
+  color: white;
+  border-radius: 12px;
   cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-size: 1rem;
   transition: background 0.3s;
 }
 
-button[type="submit"]:hover,
-button#voice-button:hover {
+button:hover, #voice-button:hover {
   background: #1d4ed8;
 }
 
@@ -108,7 +104,6 @@ button#voice-button:hover {
   text-align: center;
   font-style: italic;
   color: #555;
-  font-weight: bold;
 }
 
 /* Spinner */
@@ -133,18 +128,21 @@ button#voice-button:hover {
     padding: 15px;
   }
 
-  form#chat-form {
-    flex-wrap: wrap;
+  input[type="text"],
+  button,
+  #voice-button {
+    font-size: 0.9rem;
+  }
+
+  form {
+    flex-direction: column;
   }
 
   input[type="text"] {
-    font-size: 0.9rem;
+    width: 100%;
   }
 
-  button[type="submit"],
-  button#voice-button {
+  button, #voice-button {
     width: 100%;
-    margin-top: 8px;
-    font-size: 0.9rem;
   }
 }
