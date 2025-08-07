@@ -2,6 +2,7 @@ const chatBox = document.getElementById('chat-box');
 const chatForm = document.getElementById('chat-form');
 const messageInput = document.getElementById('message-input');
 const voiceBtn = document.getElementById('voice-btn');
+const loadingIndicator = document.getElementById('loading');
 
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
@@ -19,6 +20,8 @@ chatForm.addEventListener('submit', async (e) => {
   appendMessage('user', userMessage);
   messageInput.value = '';
 
+  loadingIndicator.style.display = 'flex'; // Mostra carregamento
+
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
@@ -27,6 +30,7 @@ chatForm.addEventListener('submit', async (e) => {
     });
 
     const data = await response.json();
+    loadingIndicator.style.display = 'none'; // Oculta carregamento
 
     if (data && data.reply) {
       appendMessage('jesus', data.reply);
@@ -34,6 +38,7 @@ chatForm.addEventListener('submit', async (e) => {
       appendMessage('jesus', 'Desculpe, não recebi uma resposta.');
     }
   } catch (error) {
+    loadingIndicator.style.display = 'none'; // Oculta carregamento
     console.error('Erro ao enviar mensagem:', error);
     appendMessage('jesus', 'Erro ao se conectar com Jesus.');
   }
