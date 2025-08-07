@@ -37,7 +37,7 @@ chatForm.addEventListener('submit', async (e) => {
     console.error('Erro ao enviar mensagem:', error);
     appendMessage('jesus', 'Erro ao se conectar com Jesus.');
   }
-}
+});
 
 // Reconhecimento de voz
 if ('webkitSpeechRecognition' in window) {
