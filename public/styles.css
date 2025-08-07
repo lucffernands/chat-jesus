@@ -79,6 +79,17 @@ button:hover {
   background-color: #003cb3;
 }
 
+/* For Tamanho normal */
+#chat-form {
+  transition: all 0.3s ease;
+  padding: 10px;
+}
+
+/* Fot Tamanho reduzido durante o carregamento */
+#chat-form.small {
+  padding: 2px;
+}
+
 /* Mensagens */
 .user, .jesus {
   margin: 10px 0;
