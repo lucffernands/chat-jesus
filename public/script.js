@@ -1,71 +1,92 @@
-const chatBox = document.getElementById('chat-box');
-const form = document.getElementById('chat-form');
-const input = document.getElementById('message-input');
-const loading = document.getElementById('loading');
-
-function addMessage(sender, text) {
-  const messageDiv = document.createElement('div');
-  messageDiv.className = sender;
-
-  const senderName = sender === 'user' ? '<strong>Você</strong>' : '<strong>Jesus</strong>';
-  messageDiv.innerHTML = `${senderName}: ${text}`;
-
-  chatBox.appendChild(messageDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const message = input.value.trim();
-  if (!message) return;
+.container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
 
-  addMessage('user', message);
-  input.value = '';
-  loading.style.display = 'block';
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+  font-weight: bold;
+}
 
-  try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message })
-    });
+#chat {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  text-align: left;
+}
 
-    const data = await response.json();
-    if (data.reply) {
-      addMessage('jesus', data.reply);
-    } else {
-      addMessage('jesus', 'Erro: Resposta vazia');
-    }
-  } catch (error) {
-    addMessage('jesus', 'Erro ao se comunicar com o servidor (Erro HTTP 500)');
-  } finally {
-    loading.style.display = 'none';
-  }
+.message {
+  background-color: #e6e6e6;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin: 10px 0;
+  max-width: 80%;
+  word-wrap: break-word;
+}
 
-  const voiceBtn = document.getElementById('voice-btn');
-  
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new SpeechRecognition();
+.user {
+  background-color: #007bff;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
 
-  recognition.lang = 'pt-BR';
-  recognition.interimResults = false;
+.bot {
+  background-color: #f1f1f1;
+  color: #333;
+  text-align: left;
+}
 
-  voiceBtn.addEventListener('click', () => {
-    recognition.start();
-    voiceBtn.textContent = '🎙️'; // muda ícone enquanto fala
-  });
+.bot strong {
+  font-weight: bold;
+}
 
-  recognition.addEventListener('result', (event) => {
-    const transcript = event.results[0][0].transcript;
-    input.value = transcript;
-  });
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
 
-  recognition.addEventListener('end', () => {
-    voiceBtn.textContent = '🎤'; // volta ao ícone original
-  });
-} else {
-  voiceBtn.disabled = true;
-  voiceBtn.title = "Reconhecimento de voz não suportado neste navegador.";
-    }
-});
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #0057e7;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+}
+
+button:hover {
+  background-color: #0041b3;
+}
