@@ -1,82 +1,89 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: #f2f2f2;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-  max-width: 700px;
-  margin: 40px auto;
+  background-color: #ffffff;
   padding: 20px;
-  background: #ffffff;
-  border-radius: 12px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #333333;
+  margin-bottom: 20px;
 }
 
 .chat-box {
-  border: 1px solid #ddd;
-  padding: 15px;
   height: 400px;
   overflow-y: auto;
-  background: #f9f9f9;
-  border-radius: 8px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #fafafa;
 }
 
 .user, .jesus {
   margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
-  line-height: 1.5;
-  white-space: pre-wrap;
+  max-width: 80%;
+  word-wrap: break-word;
 }
 
 .user {
-  background-color: #e0f7fa;
+  background-color: #d1e7dd;
+  align-self: flex-end;
   text-align: right;
+  margin-left: auto;
 }
 
 .jesus {
-  background-color: #e8f5e9;
-  text-align: left;
+  background-color: #f8d7da;
+  align-self: flex-start;
+  margin-right: auto;
 }
 
 .jesus::before {
   content: "Jesus: ";
   font-weight: bold;
-  color: #2e7d32;
 }
 
 #chat-form {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
   flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
 #message-input {
-  flex: 1 1 auto;
-  padding: 0.5rem;
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  min-width: 180px;
 }
 
 #chat-form button {
   padding: 0.5rem 0.8rem;
   font-size: 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: #4CAF50;
   color: white;
   cursor: pointer;
-  white-space: nowrap;
+  transition: background-color 0.3s ease;
 }
 
 #chat-form button[type="button"] {
@@ -84,14 +91,18 @@ h1 {
 }
 
 #chat-form button:hover {
-  opacity: 0.9;
+  background-color: #45a049;
+}
+
+#chat-form button[type="button"]:hover {
+  background-color: #1976D2;
 }
 
 .loading {
-  margin-top: 1rem;
-  font-style: italic;
-  color: #666;
+  margin-top: 10px;
   text-align: center;
+  font-style: italic;
+  color: #888;
 }
 
 .spinner {
@@ -101,7 +112,7 @@ h1 {
   width: 24px;
   height: 24px;
   animation: spin 1s linear infinite;
-  margin: 0 auto 10px;
+  margin: 10px auto;
 }
 
 @keyframes spin {
@@ -109,17 +120,18 @@ h1 {
   100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 480px) {
+/* Responsividade */
+@media (max-width: 600px) {
+  .chat-box {
+    height: 300px;
+  }
+
   #chat-form {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  #chat-form button,
-  #message-input {
+  #message-input, #chat-form button {
     width: 100%;
-  }
-
-  .container {
-    margin: 20px 10px;
   }
 }
