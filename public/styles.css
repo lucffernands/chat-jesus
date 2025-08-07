@@ -1,3 +1,4 @@
+/* Imagem de fundo*/
 body {
   font-family: Arial, sans-serif;
   background: url('https://raw.githubusercontent.com/lucffernands/chat-jesus/main/public/image-bkg-ceu.jpeg') no-repeat center center fixed;
@@ -6,6 +7,7 @@ body {
   padding: 0;
 }
 
+/* Caixa principal */
 .container {
   max-width: 600px;
   margin: 40px auto;
@@ -16,6 +18,7 @@ body {
   backdrop-filter: blur(8px);
 }
 
+/* Título */
 h1 {
   text-align: center;
   color: #333;
@@ -23,6 +26,18 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Caixa de conversa */
+.chat-box {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Formulário */
 form {
   text-align: center;
   margin-top: 20px;
@@ -64,6 +79,35 @@ button:hover {
   background-color: #003cb3;
 }
 
+/* Mensagens */
+.user, .jesus {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Carregamento */
+.loading {
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+}
+
+.spinner {
+  margin: 0 auto;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/*Responsivo*/
 #response {
   margin-top: 20px;
   padding: 15px;
