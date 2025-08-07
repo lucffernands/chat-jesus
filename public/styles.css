@@ -1,137 +1,128 @@
+/* Fundo com céu azul e nuvens */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
   margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to top, #a0d8ef, #e0f7ff);
+  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #333;
 }
 
+/* Container centralizado */
 .container {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
   max-width: 600px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  backdrop-filter: blur(5px);
 }
 
+/* Título */
 h1 {
   text-align: center;
-  color: #333333;
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* Chat box */
+.chat-box {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background: #f9f9f9;
   margin-bottom: 20px;
 }
 
-.chat-box {
-  height: 400px;
-  overflow-y: auto;
-  border: 1px solid #dddddd;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #fafafa;
-}
-
+/* Mensagens */
 .user, .jesus {
   margin: 10px 0;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 10px 15px;
+  border-radius: 16px;
   max-width: 80%;
   word-wrap: break-word;
+  line-height: 1.5;
 }
 
 .user {
-  background-color: #d1e7dd;
+  background: #dbeafe;
   align-self: flex-end;
   text-align: right;
   margin-left: auto;
 }
 
 .jesus {
-  background-color: #f8d7da;
-  align-self: flex-start;
-  margin-right: auto;
+  background: #fef9c3;
+  border-left: 4px solid #facc15;
 }
 
-.jesus::before {
-  content: "Jesus: ";
-  font-weight: bold;
-}
-
-#chat-form {
+/* Formulário */
+form {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
-  align-items: center;
 }
 
-#message-input {
+input[type="text"] {
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #cccccc;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
   font-size: 1rem;
 }
 
-#chat-form button {
-  padding: 0.5rem 0.8rem;
-  font-size: 1rem;
+button {
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
-  background-color: #4CAF50;
+  background: #2563eb;
   color: white;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  transition: background 0.3s;
 }
 
-#chat-form button[type="button"] {
-  background-color: #2196F3;
+button:hover {
+  background: #1d4ed8;
 }
 
-#chat-form button:hover {
-  background-color: #45a049;
-}
-
-#chat-form button[type="button"]:hover {
-  background-color: #1976D2;
-}
-
+/* Loading */
 .loading {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
   font-style: italic;
-  color: #888;
+  color: #555;
 }
 
+/* Spinner */
 .spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #4CAF50;
-  border-radius: 50%;
   width: 24px;
   height: 24px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #2563eb;
+  border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin: 10px auto;
+  margin: 0 auto 10px;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Responsividade */
+/* Responsivo */
 @media (max-width: 600px) {
-  .chat-box {
-    height: 300px;
+  .container {
+    margin: 20px;
+    padding: 15px;
   }
 
-  #chat-form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  #message-input, #chat-form button {
-    width: 100%;
+  input[type="text"],
+  button {
+    font-size: 0.9rem;
   }
 }
