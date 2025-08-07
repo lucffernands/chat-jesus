@@ -81,8 +81,25 @@ button:hover {
 
 /* Mensagens */
 .user, .jesus {
-  margin-bottom: 10px;
-  line-height: 1.4;
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 16px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.user {
+  background: #dbeafe;
+  align-self: flex-end;
+  text-align: right;
+  margin-left: auto;
+}
+
+.jesus {
+  background: #fef9c3;
+  border-left: 4px solid #facc15;
+  font-weight: bold;
 }
 
 /* Carregamento */
