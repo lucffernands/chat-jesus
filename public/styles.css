@@ -1,7 +1,10 @@
 body {
   font-family: Arial, sans-serif;
-  background-image: url('https://images.unsplash.com/photo-1612831660250-3b461fa5bb71?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1080&w=1920') no-repeat center center fixed;
+  background-image: url('https://images.unsplash.com/photo-1612831660250-3b461fa5bb71?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1080&w=1920');
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   margin: 0;
   padding: 0;
 }
