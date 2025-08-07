@@ -6,10 +6,13 @@ const loadingIndicator = document.getElementById('loading');
 
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
-  messageDiv.innerHTML = `<strong>${sender === 'user' ? 'Você' : 'Jesus'}:</strong> ${text}`;
-  chatBox.appendChild(messageDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
+messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
+
+const senderName = sender === 'user' ? '<strong>Você:</strong>' : '<strong>Jesus:</strong>';
+messageDiv.innerHTML = `${senderName} ${text}`;
+
+chatBox.appendChild(messageDiv);
+chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 chatForm.addEventListener('submit', async (e) => {
