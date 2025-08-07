@@ -1,119 +1,65 @@
-body {
-  font-family: Arial, sans-serif;
-  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  const chatBox = document.getElementById('chat-box');
+const chatForm = document.getElementById('chat-form');
+const messageInput = document.getElementById('message-input');
+const voiceBtn = document.getElementById('voice-btn');
+
+function appendMessage(sender, text) {
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message', sender);
+  messageDiv.innerHTML = `<strong>${sender === 'user' ? 'Você' : 'Jesus'}:</strong> ${text}`;
+  chatBox.appendChild(messageDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-.chat-container {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  max-width: 90%;
-  width: 100%;
-  text-align: center;
-}
+chatForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const userMessage = messageInput.value.trim();
+  if (!userMessage) return;
 
-h1 {
-  margin-top: 0;
-  font-size: 2rem;
-  color: #333;
-  font-weight: bold;
-}
+  appendMessage('user', userMessage);
+  messageInput.value = '';
 
-#chat-box {
-  height: 300px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  text-align: left;
-}
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userMessage })
+    });
 
-.message {
-  margin-bottom: 1rem;
-}
+    const data = await response.json();
 
-.message.user {
-  text-align: right;
-}
-
-.message.jesus {
-  text-align: left;
-}
-
-.message span {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  max-width: 70%;
-  word-wrap: break-word;
-}
-
-.message.user span {
-  background-color: #d1e7dd;
-}
-
-.message.jesus span {
-  background-color: #f8d7da;
-  font-weight: bold;
-}
-
-form {
-  text-align: center;
-  margin-top: 20px;
-}
-
-input[type="text"] {
-  padding: 10px;
-  width: 90%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #1E50FF;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  min-width: 120px;
-  max-width: 150px;
-  flex: 1 1 auto;
-}
-
-button:hover {
-  background-color: #003cb3;
-}
-
-@media (max-width: 600px) {
-  .chat-container {
-    padding: 1rem;
+    if (data && data.reply) {
+      appendMessage('bot', data.reply);
+    } else {
+      appendMessage('bot', 'Desculpe, não recebi uma resposta.');
+    }
+  } catch (error) {
+    console.error('Erro ao enviar mensagem:', error);
+    appendMessage('bot', 'Erro ao se conectar com Jesus.');
   }
+});
 
-  .button-group {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+// Reconhecimento de voz (Web Speech API)
+if ('webkitSpeechRecognition' in window) {
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = 'pt-BR';
+  recognition.continuous = false;
+
+  voiceBtn.addEventListener('click', () => {
+    recognition.start();
+  });
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    messageInput.value = transcript;
+    chatForm.dispatchEvent(new Event('submit'));
+  };
+
+  recognition.onerror = (event) => {
+    console.error('Erro no reconhecimento de voz:', event.error);
+    appendMessage('bot', 'Não consegui entender sua voz.');
+  };
+} else {
+  voiceBtn.disabled = true;
+  voiceBtn.innerText = '🎙️ Indisponível';
 }
