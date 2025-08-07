@@ -1,11 +1,11 @@
-  const chatBox = document.getElementById('chat-box');
+const chatBox = document.getElementById('chat-box');
 const chatForm = document.getElementById('chat-form');
 const messageInput = document.getElementById('message-input');
 const voiceBtn = document.getElementById('voice-btn');
 
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message', sender);
+  messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
   messageDiv.innerHTML = `<strong>${sender === 'user' ? 'Você' : 'Jesus'}:</strong> ${text}`;
   chatBox.appendChild(messageDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
@@ -29,17 +29,17 @@ chatForm.addEventListener('submit', async (e) => {
     const data = await response.json();
 
     if (data && data.reply) {
-      appendMessage('bot', data.reply);
+      appendMessage('jesus', data.reply);
     } else {
-      appendMessage('bot', 'Desculpe, não recebi uma resposta.');
+      appendMessage('jesus', 'Desculpe, não recebi uma resposta.');
     }
   } catch (error) {
     console.error('Erro ao enviar mensagem:', error);
-    appendMessage('bot', 'Erro ao se conectar com Jesus.');
+    appendMessage('jesus', 'Erro ao se conectar com Jesus.');
   }
-});
+}
 
-// Reconhecimento de voz (Web Speech API)
+// Reconhecimento de voz
 if ('webkitSpeechRecognition' in window) {
   const recognition = new webkitSpeechRecognition();
   recognition.lang = 'pt-BR';
@@ -57,7 +57,7 @@ if ('webkitSpeechRecognition' in window) {
 
   recognition.onerror = (event) => {
     console.error('Erro no reconhecimento de voz:', event.error);
-    appendMessage('bot', 'Não consegui entender sua voz.');
+    appendMessage('jesus', 'Não consegui entender sua voz.');
   };
 } else {
   voiceBtn.disabled = true;
