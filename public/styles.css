@@ -15,7 +15,6 @@ body {
   display: flex; /* 🔹 ativa flexbox */
   flex-direction: column; /* 🔹 elementos em coluna */
   max-width: 600px;
-  height: 90vh; /* 🔹 ocupa quase toda altura */
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
