@@ -34,6 +34,7 @@ h1 {
 .chat-box {
   flex: 1; /* 🔹 cresce para ocupar espaço */
   overflow-y: auto; /* 🔹 rola quando precisar */
+  height: auto;
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
