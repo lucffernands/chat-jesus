@@ -1,18 +1,23 @@
-/* Imagem de fundo*/
 body {
   font-family: Arial, sans-serif;
   background: url('https://raw.githubusercontent.com/lucffernands/chat-jesus/main/public/image-bkg-ceu.jpeg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
+  height: 100vh; /* 🔹 para ocupar a tela toda */
+  display: flex; /* 🔹 para centralizar verticalmente */
+  justify-content: center;
+  align-items: center;
 }
 
 /* Caixa principal */
 .container {
+  display: flex; /* 🔹 ativa flexbox */
+  flex-direction: column; /* 🔹 elementos em coluna */
   max-width: 600px;
-  margin: 40px auto;
+  height: 90vh; /* 🔹 ocupa quase toda altura */
   padding: 20px;
-  background: rgba(255, 255, 255, 0.6); /* fundo branco com transparência */
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
@@ -23,25 +28,25 @@ h1 {
   text-align: center;
   color: #333;
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 10px; /* 🔹 menos espaço */
 }
 
 /* Caixa de conversa */
 .chat-box {
-  height: 300px;
-  overflow-y: auto;
+  flex: 1; /* 🔹 cresce para ocupar espaço */
+  overflow-y: auto; /* 🔹 rola quando precisar */
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Formulário */
 form {
   text-align: center;
-  margin-top: 20px;
-  padding: 20px; /* Para ajudar na centralização */
 }
 
 input[type="text"] {
@@ -79,20 +84,18 @@ button:hover {
   background-color: #003cb3;
 }
 
-/* For Tamanho normal */
 #chat-form {
   transition: all 0.3s ease;
   padding: 10px;
 }
 
-/* Fot Tamanho reduzido durante o carregamento */
 #chat-form.small {
   padding: 2px;
 }
 
 /* Mensagens */
 .user, .jesus {
-  margin: 10px 0;
+  margin: 5px 0;
   padding: 10px 15px;
   border-radius: 16px;
   max-width: 80%;
@@ -124,8 +127,8 @@ button:hover {
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 500;
-  margin-top: 15px;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); /* brilho dourado */
+  margin-top: 10px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
   text-align: center;
   animation: glow 2s ease-in-out infinite;
 }
@@ -150,7 +153,6 @@ button:hover {
   100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
 }
 
-/*Responsivo*/
 #response {
   margin-top: 20px;
   padding: 15px;
@@ -161,10 +163,10 @@ button:hover {
   line-height: 1.5;
 }
 
-/* Responsivo para telas menores */
 @media (max-width: 600px) {
   .container {
-    margin: 20px;
+    margin: 10px;
     padding: 15px;
+    height: 95vh; /* 🔹 ocupa quase toda tela no celular */
   }
 }
