@@ -1,20 +1,18 @@
+/* Imagem de fundo*/
 body {
   font-family: Arial, sans-serif;
   background: url('https://raw.githubusercontent.com/lucffernands/chat-jesus/main/public/image-bkg-ceu.jpeg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
-  padding: 40px 0;
-  min-height: 100vh;
-  display: flex; /* 🔹 para centralizar verticalmente */
-  justify-content: center;
+  padding: 0;
 }
 
 /* Caixa principal */
 .container {
   max-width: 600px;
-  width: 100%;
+  margin: 40px auto;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.6); /* fundo branco com transparência */
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
@@ -25,7 +23,7 @@ h1 {
   text-align: center;
   color: #333;
   font-size: 28px;
-  margin-bottom: 10px; /* 🔹 menos espaço */
+  margin-bottom: 20px;
 }
 
 /* Caixa de conversa */
@@ -37,18 +35,16 @@ h1 {
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
-  display: flex;
-  transition: height 0.4s ease;
 }
 
 /* Formulário */
 form {
-  display: flex;
-  gap: 10p;
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px; /* Para ajudar na centralização */
 }
 
 input[type="text"] {
-  flex: 1;
   padding: 10px;
   width: 90%;
   max-width: 400px;
@@ -74,29 +70,23 @@ button {
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  min-width: 100px;
+  max-width: 150px;
+  flex: 1;
 }
 
 button:hover {
   background-color: #003cb3;
 }
 
-#chat-form {
-  transition: all 0.3s ease;
-  padding: 10px;
-}
-
-#chat-form.small {
-  padding: 2px;
-}
-
 /* Mensagens */
 .user, .jesus {
-  margin: 5px 0;
+  margin: 10px 0;
   padding: 10px 15px;
   border-radius: 16px;
-  min-width: fit-content;  /* 🔹 Começa só com o tamanho do texto */
+  max-width: 80%;
+  word-wrap: break-word;
   line-height: 1.5;
-  display: inline-block;   /* 🔹 Faz a largura se ajustar ao conteúdo */
 }
 
 .user {
@@ -147,4 +137,24 @@ button:hover {
   0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
   50% { box-shadow: 0 0 16px rgba(255, 215, 0, 0.7); }
   100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
+}
+
+/*Responsivo*/
+#response {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  white-space: pre-wrap;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Responsivo para telas menores */
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+    padding: 15px;
   }
+  }
+    
