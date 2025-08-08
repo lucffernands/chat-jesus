@@ -61,18 +61,20 @@ input[type="text"] {
   margin-top: 12px;
 }
 
+button:active {
+  background-color: #3e8e41; /* cor quando clica */
+  transform: scale(0.97); /* leve efeito de "apertar" */
+}
+
+button:focus {
+  outline: none; /* remove borda azul padrão */
+  box-shadow: 0 0 5px rgba(72, 239, 128, 0.7); /* brilho suave */
+}
+
 button {
-  /* padding: 10px 20px;
-  font-size: 16px;
-  background-color: #1E50FF;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer; */
   min-width: 100px;
   max-width: 150px;
   flex: 1;
-
   background: rgba(173, 216, 230, 0.7); /* azul claro transparente */
   border: none;
   border-radius: 50px; /* formato de nuvem */
