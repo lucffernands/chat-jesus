@@ -15,14 +15,11 @@ body {
   flex-direction: column;
   max-width: 600px;
   width: 100%;
-  min-height: 300px; /* altura mínima para começar */
-  max-height: 90vh;  /* não ultrapassa 90% da altura da tela */
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
-  overflow: hidden; /* evita que conteúdo ultrapasse bordas */
 }
 
 /* Título */
@@ -35,16 +32,18 @@ h1 {
 
 /* Caixa de conversa */
 .chat-box {
-  flex: 1; /* 🔹 cresce para ocupar espaço */
-  overflow-y: auto; /* 🔹 rola quando precisar */
-  height: 300px;
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 200px; /* inicia pequeno */
+  max-height: 700px; /* limite máximo */
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.2);
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+  transition: height 0.4s ease;
 }
 
 /* Formulário */
