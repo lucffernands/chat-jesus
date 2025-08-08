@@ -41,7 +41,7 @@ chatForm.addEventListener('submit', async (e) => {
       appendMessage('jesus', 'Desculpe, não recebi uma resposta.');
     }
   } catch (error) {
-    loadingIndicator.style.display = 'none';
+    loadingIndicator.style.display = 'none'; // Oculta carregamento
     console.error('Erro ao enviar mensagem:', error);
     appendMessage('jesus', 'Erro ao se conectar com Jesus.');
   }
