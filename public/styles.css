@@ -116,14 +116,15 @@ button:hover {
   display: none;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   background-color: #fffbe6;
   color: #444;
   padding: 12px 16px;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 500;
-  margin-top: 20px;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  margin-top: 15px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); /* brilho dourado */
   text-align: center;
   animation: glow 2s ease-in-out infinite;
 }
@@ -146,4 +147,4 @@ button:hover {
   0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
   50% { box-shadow: 0 0 16px rgba(255, 215, 0, 0.7); }
   100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
-}
+  }
