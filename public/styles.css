@@ -11,14 +11,18 @@ body {
 
 /* Caixa principal */
 .container {
-  display: flex; /* 🔹 ativa flexbox */
-  flex-direction: column; /* 🔹 elementos em coluna */
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
+  width: 100%;
+  min-height: 300px; /* altura mínima para começar */
+  max-height: 90vh;  /* não ultrapassa 90% da altura da tela */
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
+  overflow: hidden; /* evita que conteúdo ultrapasse bordas */
 }
 
 /* Título */
