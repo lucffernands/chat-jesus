@@ -3,8 +3,8 @@ body {
   background: url('https://raw.githubusercontent.com/lucffernands/chat-jesus/main/public/image-bkg-ceu.jpeg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
-  padding: 40px 0 0 0;
-  height: 100vh; /* 🔹 para ocupar a tela toda */
+  padding: 40px 0;
+  height: vh40; /* 🔹 para ocupar a tela toda */
   display: flex; /* 🔹 para centralizar verticalmente */
   justify-content: center;
 }
