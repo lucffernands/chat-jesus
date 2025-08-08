@@ -4,29 +4,52 @@ const messageInput = document.getElementById('message-input');
 const voiceBtn = document.getElementById('voice-btn');
 const loadingIndicator = document.getElementById('loading');
 
-let voices = [];
+let maleVoice = null;
+
+// Carrega vozes e escolhe masculina
 function loadVoices() {
-  voices = speechSynthesis.getVoices();
+  const voices = speechSynthesis.getVoices();
+  maleVoice = voices.find(v => v.lang === 'pt-BR' && /male|Ricardo|Google/.test(v.name));
 }
+
+// Alguns navegadores carregam as vozes com atraso
 speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
 
-// Função para falar com voz masculina
-function speakJesus(text) {
-  if (!voices.length) loadVoices();
+// Função para falar texto com voz masculina
+function speakWithMaleVoice(text) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'pt-BR';
+  utterance.rate = 1;
+  utterance.pitch = 1;
 
-  let voice = voices.find(v => v.lang === 'pt-BR' && /male|masculina/i.test(v.name));
-  if (!voice) {
-    // Caso não encontre voz masculina, pega qualquer PT-BR
-    voice = voices.find(v => v.lang === 'pt-BR');
+  if (maleVoice) {
+    utterance.voice = maleVoice;
   }
 
-  if (voice) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = voice;
-    utterance.rate = 1;
-    speechSynthesis.speak(utterance);
+  speechSynthesis.speak(utterance);
+}
+
+function appendMessage(sender, text) {
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
+
+  const senderName = sender === 'user'
+    ? '<strong>Você:</strong>'
+    : '<strong style="color: #8B0000;">Jesus:</strong>';
+  
+  messageDiv.innerHTML = `${senderName} ${text}`;
+  chatBox.appendChild(messageDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Se for resposta de Jesus, falar com voz masculina
+  if (sender === 'jesus') {
+    speakWithMaleVoice(text);
   }
 }
+
+// Aqui você mantém o resto do seu código para enviar mensagens,
+// chamar a API e adicionar mensagens usando appendMessage()
 
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
