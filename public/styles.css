@@ -96,9 +96,11 @@ button:hover {
   margin: 5px 0;
   padding: 10px 15px;
   border-radius: 16px;
-  max-width: 80%;
+  min-width: fit-content;  /* 🔹 Começa só com o tamanho do texto */
+  max-width: 80%;          /* 🔹 Continua limitado para não ficar gigante */
   word-wrap: break-word;
   line-height: 1.5;
+  display: inline-block;   /* 🔹 Faz a largura se ajustar ao conteúdo */
 }
 
 .user {
