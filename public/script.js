@@ -4,15 +4,46 @@ const messageInput = document.getElementById('message-input');
 const voiceBtn = document.getElementById('voice-btn');
 const loadingIndicator = document.getElementById('loading');
 
+let voices = [];
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+
+// Função para falar com voz masculina
+function speakJesus(text) {
+  if (!voices.length) loadVoices();
+
+  let voice = voices.find(v => v.lang === 'pt-BR' && /male|masculina/i.test(v.name));
+  if (!voice) {
+    // Caso não encontre voz masculina, pega qualquer PT-BR
+    voice = voices.find(v => v.lang === 'pt-BR');
+  }
+
+  if (voice) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 1;
+    speechSynthesis.speak(utterance);
+  }
+}
+
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
-messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
+  messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
 
-const senderName = sender === 'user' ? '<strong>Você:</strong>' : '<strong>Jesus:</strong>';
-messageDiv.innerHTML = `${senderName} ${text}`;
+  const senderName = sender === 'user' 
+    ? '<strong>Você:</strong>' 
+    : '<strong style="color:#8B0000;">Jesus:</strong>';
 
-chatBox.appendChild(messageDiv);
-chatBox.scrollTop = chatBox.scrollHeight;
+  messageDiv.innerHTML = `${senderName} ${text}`;
+  chatBox.appendChild(messageDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Se for Jesus, falar em voz masculina
+  if (sender === 'jesus') {
+    speakJesus(text);
+  }
 }
 
 chatForm.addEventListener('submit', async (e) => {
@@ -23,7 +54,7 @@ chatForm.addEventListener('submit', async (e) => {
   appendMessage('user', userMessage);
   messageInput.value = '';
 
-  loadingIndicator.style.display = 'flex'; // Mostra carregamento
+  loadingIndicator.style.display = 'flex';
 
   try {
     const response = await fetch('/api/chat', {
@@ -33,7 +64,7 @@ chatForm.addEventListener('submit', async (e) => {
     });
 
     const data = await response.json();
-    loadingIndicator.style.display = 'none'; // Oculta carregamento
+    loadingIndicator.style.display = 'none';
 
     if (data && data.reply) {
       appendMessage('jesus', data.reply);
@@ -41,7 +72,7 @@ chatForm.addEventListener('submit', async (e) => {
       appendMessage('jesus', 'Desculpe, não recebi uma resposta.');
     }
   } catch (error) {
-    loadingIndicator.style.display = 'none'; // Oculta carregamento
+    loadingIndicator.style.display = 'none';
     console.error('Erro ao enviar mensagem:', error);
     appendMessage('jesus', 'Erro ao se conectar com Jesus.');
   }
