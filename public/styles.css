@@ -4,15 +4,13 @@ body {
   background-size: cover;
   margin: 0;
   padding: 40px 0;
-  height: 40vh; /* 🔹 para ocupar 40% da tela */
+  min-height: 100vh;
   display: flex; /* 🔹 para centralizar verticalmente */
   justify-content: center;
 }
 
 /* Caixa principal */
 .container {
-  display: flex;
-  flex-direction: column;
   max-width: 600px;
   width: 100%;
   padding: 20px;
@@ -32,26 +30,25 @@ h1 {
 
 /* Caixa de conversa */
 .chat-box {
-  flex-grow: 1;
+  height: 300px;
   overflow-y: auto;
-  min-height: 200px; /* inicia pequeno */
-  max-height: 700px; /* limite máximo */
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.2);
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
   transition: height 0.4s ease;
 }
 
 /* Formulário */
 form {
-  text-align: center;
+  display: flex;
+  gap: 10p;
 }
 
 input[type="text"] {
+  flex: 1;
   padding: 10px;
   width: 90%;
   max-width: 400px;
@@ -77,9 +74,6 @@ button {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  min-width: 100px;
-  max-width: 150px;
-  flex: 1;
 }
 
 button:hover {
@@ -101,8 +95,6 @@ button:hover {
   padding: 10px 15px;
   border-radius: 16px;
   min-width: fit-content;  /* 🔹 Começa só com o tamanho do texto */
-  max-width: 80%;          /* 🔹 Continua limitado para não ficar gigante */
-  word-wrap: break-word;
   line-height: 1.5;
   display: inline-block;   /* 🔹 Faz a largura se ajustar ao conteúdo */
 }
@@ -124,7 +116,6 @@ button:hover {
   display: none;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   background-color: #fffbe6;
   color: #444;
   padding: 12px 16px;
@@ -155,22 +146,4 @@ button:hover {
   0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
   50% { box-shadow: 0 0 16px rgba(255, 215, 0, 0.7); }
   100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
-}
-
-/* Responsivo */
-#response {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f1f1f1;
-  border-radius: 15px;
-  white-space: pre-wrap;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-@media (max-width: 600px) {
-  .container {
-    margin: 10px;
-    padding: 15px;
-  }
 }
