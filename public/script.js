@@ -4,68 +4,34 @@ const messageInput = document.getElementById('message-input');
 const voiceBtn = document.getElementById('voice-btn');
 const loadingIndicator = document.getElementById('loading');
 
-let maleVoice = null;
-
-// Carrega vozes e escolhe masculina
-function loadVoices() {
-  const voices = speechSynthesis.getVoices();
-  maleVoice = voices.find(v => v.lang === 'pt-BR' && /male|Ricardo|Google/.test(v.name));
-}
-
-// Alguns navegadores carregam as vozes com atraso
-speechSynthesis.onvoiceschanged = loadVoices;
-loadVoices();
-
-// Função para falar texto com voz masculina
-function speakWithMaleVoice(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'pt-BR';
-  utterance.rate = 1;
-  utterance.pitch = 1;
-
-  if (maleVoice) {
-    utterance.voice = maleVoice;
-  }
-
-  speechSynthesis.speak(utterance);
-}
-
+// Função para adicionar mensagens no chat
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
 
-  const senderName = sender === 'user'
-    ? '<strong>Você:</strong>'
-    : '<strong style="color: #8B0000;">Jesus:</strong>';
-  
+  const senderName = sender === 'user' ? '<strong>Você:</strong>' : '<strong style="color:#8B0000">Jesus:</strong>';
   messageDiv.innerHTML = `${senderName} ${text}`;
+
   chatBox.appendChild(messageDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
-
-  // Se for resposta de Jesus, falar com voz masculina
-  if (sender === 'jesus') {
-    speakWithMaleVoice(text);
-  }
 }
 
-// Aqui você mantém o resto do seu código para enviar mensagens,
-// chamar a API e adicionar mensagens usando appendMessage()
+// Função para falar a resposta de Jesus
+function speakJesus(text) {
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'pt-BR';
+    utterance.pitch = 1;
+    utterance.rate = 1;
+    // Força voz masculina, se disponível
+    const voices = speechSynthesis.getVoices();
+    const maleVoice = voices.find(v => 
+      v.lang === 'pt-BR' && (v.name.includes('Male') || v.name.includes('Ricardo') || v.name.includes('Google'))
+    );
+    if (maleVoice) utterance.voice = maleVoice;
 
-function appendMessage(sender, text) {
-  const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message', sender === 'user' ? 'user' : 'jesus');
-
-  const senderName = sender === 'user' 
-    ? '<strong>Você:</strong>' 
-    : '<strong style="color:#8B0000;">Jesus:</strong>';
-
-  messageDiv.innerHTML = `${senderName} ${text}`;
-  chatBox.appendChild(messageDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
-
-  // Se for Jesus, falar em voz masculina
-  if (sender === 'jesus') {
-    speakJesus(text);
+    speechSynthesis.cancel(); // Evita sobreposição
+    speechSynthesis.speak(utterance);
   }
 }
 
@@ -91,13 +57,17 @@ chatForm.addEventListener('submit', async (e) => {
 
     if (data && data.reply) {
       appendMessage('jesus', data.reply);
+      speakJesus(data.reply); // Fala a resposta
     } else {
       appendMessage('jesus', 'Desculpe, não recebi uma resposta.');
     }
   } catch (error) {
     loadingIndicator.style.display = 'none';
     console.error('Erro ao enviar mensagem:', error);
-    appendMessage('jesus', 'Erro ao se conectar com Jesus.');
+    // Só mostra erro se não houver mensagem já exibida
+    if (!chatBox.lastChild || !chatBox.lastChild.classList.contains('jesus')) {
+      appendMessage('jesus', 'Erro ao se conectar com Jesus.');
+    }
   }
 });
 
