@@ -62,16 +62,27 @@ input[type="text"] {
 }
 
 button {
-  padding: 10px 20px;
+  /* padding: 10px 20px;
   font-size: 16px;
   background-color: #1E50FF;
   color: white;
   border: none;
   border-radius: 20px;
-  cursor: pointer;
+  cursor: pointer; */
   min-width: 100px;
   max-width: 150px;
   flex: 1;
+
+  background: linear-gradient(145deg, #f0f0f0, #ffffff);
+  border: none;
+  border-radius: 50px; /* Arredondado para formato de nuvem */
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.6);
+  transition: all 0.2s ease-in-out;
 }
 
 button:hover {
