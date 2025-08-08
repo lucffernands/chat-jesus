@@ -15,6 +15,12 @@ chatBox.appendChild(messageDiv);
 chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+// Se for resposta de Jesus, aumenta a altura
+  if (sender === 'jesus') {
+    chatBox.style.height = '700px';
+  }
+}
+
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const userMessage = messageInput.value.trim();
