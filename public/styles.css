@@ -61,6 +61,11 @@ input[type="text"] {
   margin-top: 12px;
 }
 
+/* Remove o destaque azul ao tocar no botão no celular */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 button:active {
   background-color: #3e8e41; /* cor quando clica */
   transform: scale(0.97); /* leve efeito de "apertar" */
