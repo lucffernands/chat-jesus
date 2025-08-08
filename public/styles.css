@@ -151,6 +151,7 @@ button:hover {
   100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
 }
 
+/* Responsivo */
 #response {
   margin-top: 20px;
   padding: 15px;
@@ -165,6 +166,5 @@ button:hover {
   .container {
     margin: 10px;
     padding: 15px;
-    height: 95vh; /* 🔹 ocupa quase toda tela no celular */
   }
 }
