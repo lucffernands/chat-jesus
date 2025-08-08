@@ -4,7 +4,7 @@ body {
   background-size: cover;
   margin: 0;
   padding: 40px 0;
-  height: 40vh; /* 🔹 para ocupar a tela toda */
+  height: 40vh; /* 🔹 para ocupar 40% da tela */
   display: flex; /* 🔹 para centralizar verticalmente */
   justify-content: center;
 }
@@ -14,6 +14,7 @@ body {
   display: flex; /* 🔹 ativa flexbox */
   flex-direction: column; /* 🔹 elementos em coluna */
   max-width: 600px;
+  height: auto;
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
