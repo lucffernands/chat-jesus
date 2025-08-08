@@ -20,6 +20,9 @@ chatForm.addEventListener('submit', async (e) => {
   const userMessage = messageInput.value.trim();
   if (!userMessage) return;
 
+  // 🔹 Diminui a altura do formulário antes da resposta
+  chatForm.style.height = "40px";
+
   appendMessage('user', userMessage);
   messageInput.value = '';
 
@@ -35,13 +38,17 @@ chatForm.addEventListener('submit', async (e) => {
     const data = await response.json();
     loadingIndicator.style.display = 'none'; // Oculta carregamento
 
+    // 🔹 Restaura altura automática depois que Jesus responder
+    chatForm.style.height = "auto";
+
     if (data && data.reply) {
       appendMessage('jesus', data.reply);
     } else {
       appendMessage('jesus', 'Desculpe, não recebi uma resposta.');
     }
   } catch (error) {
-    loadingIndicator.style.display = 'none'; // Oculta carregamento
+    loadingIndicator.style.display = 'none';
+    chatForm.style.height = "auto"; // Garante que volta ao normal mesmo com erro
     console.error('Erro ao enviar mensagem:', error);
     appendMessage('jesus', 'Erro ao se conectar com Jesus.');
   }
