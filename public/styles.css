@@ -73,16 +73,18 @@ button {
   max-width: 150px;
   flex: 1;
 
-  background: linear-gradient(145deg, #f0f0f0, #ffffff);
+  background: rgba(173, 216, 230, 0.7); /* azul claro transparente */
   border: none;
-  border-radius: 50px; /* Arredondado para formato de nuvem */
+  border-radius: 50px; /* formato de nuvem */
   padding: 10px 20px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  color: #333;
-  box-shadow: 2px 4px 6px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.6);
+  color: #003366; /* azul escuro para o texto */
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.2),
+  inset 1px 1px 2px rgba(255,255,255,0.5);
   transition: all 0.2s ease-in-out;
+  backdrop-filter: blur(4px); /* efeito vidro */
 }
 
 button:hover {
