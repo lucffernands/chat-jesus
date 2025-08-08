@@ -14,7 +14,6 @@ body {
   display: flex; /* 🔹 ativa flexbox */
   flex-direction: column; /* 🔹 elementos em coluna */
   max-width: 600px;
-  height: auto;
   padding: 20px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
@@ -34,7 +33,7 @@ h1 {
 .chat-box {
   flex: 1; /* 🔹 cresce para ocupar espaço */
   overflow-y: auto; /* 🔹 rola quando precisar */
-  height: auto;
+  height: 300px;
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
