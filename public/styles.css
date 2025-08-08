@@ -100,6 +100,10 @@ button:hover {
   border-left: 4px solid #facc15;
 }
 
+.jesus strong {
+  color: #8B0000;
+}
+
 /* Carregamento */
 .loading {
   display: none;
