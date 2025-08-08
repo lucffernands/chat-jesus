@@ -15,9 +15,6 @@ chatBox.appendChild(messageDiv);
 chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Altura inicial do chat
-chatBox.styles.height = "200px";
-
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const userMessage = messageInput.value.trim();
@@ -40,9 +37,6 @@ chatForm.addEventListener('submit', async (e) => {
 
     if (data && data.reply) {
       appendMessage('jesus', data.reply);
-
-      // Aumenta altura do chat após Jesus responder 
-      chatBox.styles.height = "700px";
     } else {
       appendMessage('jesus', 'Desculpe, não recebi uma resposta.');
     }
