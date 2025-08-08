@@ -61,21 +61,6 @@ input[type="text"] {
   margin-top: 12px;
 }
 
-/* Remove o destaque azul ao tocar no botão no celular */
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button:active {
-  background-color: #3e8e41; /* cor quando clica */
-  transform: scale(0.97); /* leve efeito de "apertar" */
-}
-
-button:focus {
-  outline: none; /* remove borda azul padrão */
-  box-shadow: 0 0 5px rgba(72, 239, 128, 0.7); /* brilho suave */
-}
-
 button {
   min-width: 100px;
   max-width: 150px;
@@ -96,6 +81,21 @@ button {
 
 button:hover {
   background-color: #003cb3;
+}
+
+/* Remove o destaque azul ao tocar no botão no celular */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+  background-color: #3e8e41; /* cor quando clica */
+  transform: scale(0.97); /* leve efeito de "apertar" */
+}
+
+button:focus {
+  outline: none; /* remove borda azul padrão */
+  box-shadow: 0 0 5px rgba(72, 239, 128, 0.7); /* brilho suave */
 }
 
 /* Mensagens */
