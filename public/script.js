@@ -17,7 +17,7 @@ function appendMessage(sender, text) {
 }
 
 // Função para falar a resposta de Jesus
-function speakJesus(text) {
+/* function speakJesus(text) {
   if ('speechSynthesis' in window) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'pt-BR';
@@ -31,7 +31,7 @@ function speakJesus(text) {
     if (maleVoice) utterance.voice = maleVoice;
 
     speechSynthesis.cancel(); // Evita sobreposição
-    speechSynthesis.speak(utterance);
+    speechSynthesis.speak(utterance); */
   }
 }
 
