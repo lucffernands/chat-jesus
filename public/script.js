@@ -31,9 +31,9 @@ function appendMessage(sender, text) {
     if (maleVoice) utterance.voice = maleVoice;
 
     speechSynthesis.cancel(); // Evita sobreposição
-    speechSynthesis.speak(utterance); */
+    speechSynthesis.speak(utterance); 
   }
-}
+} */
 
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
