@@ -50,7 +50,7 @@ header h1 {
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.25);
   position: fixed;
   top: 0;
-  right: -260px;
+  right: -260px; /* escondido inicialmente */
   width: 260px;
   height: 100%;
   padding: 20px;
@@ -60,7 +60,7 @@ header h1 {
 }
 
 .side-menu.open {
-  right: 0;
+  right: 0; /* aparece quando tem a classe .open */
 }
 
 .side-menu h3 {
@@ -90,9 +90,10 @@ header h1 {
   left: 10px;
   background: transparent;
   border: none;
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   color: #333;
+  line-height: 1;
 }
 
 .close-menu-btn:hover {
