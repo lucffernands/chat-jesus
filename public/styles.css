@@ -11,7 +11,36 @@ body {
   padding: 0;
 }
 
-/* Cabeçalho com menu */
+header {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #8b0000;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  justify-content: center;
+  position: relative;
+}
+
+.menu-btn {
+  position: absolute;
+  left: 15px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Cabeçalho com menu 
 header {
   background-color: #8b0000;
   color: white;
@@ -31,14 +60,14 @@ header h2 {
   font-size: 20px;
 }
 
-/* Botão hambúrguer */
+/* Botão hambúrguer 
 .menu-btn {
   font-size: 28px;
   background: none;
   border: none;
   color: white;
   cursor: pointer;
-}
+} */
 
 /* Menu lateral */
 .side-menu {
