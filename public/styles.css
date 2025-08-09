@@ -45,6 +45,11 @@ header h1 {
 }
 
 /* Menu lateral */
+.menu-back {
+  display: flex;
+  justify-content: space-between;
+}
+
 .side-menu {
   background-color: rgba(211, 211, 211, 0.95); /* cinza claro com pouca transparência */
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.25);
