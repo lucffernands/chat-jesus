@@ -328,7 +328,9 @@ voiceRadios.forEach(radio => {
 });
 
 function toggleMenu() {
-  sideMenu.classList.toggle('open');
+  function toggleMenu() {
+  document.getElementById("sideMenu").classList.toggle("open");
+  }
 }
 
 // Botão seta para fechar
