@@ -19,6 +19,13 @@ header {
   padding: 10px 30px 10px 15px;
   background-color: rgba(173, 216, 230, 0.8); /* azul claro com 80% de opacidade */
   color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow:
+    -1px -1px 0 gold,
+     1px -1px 0 gold,
+    -1px  1px 0 gold,
+     1px  1px 0 gold;
   position: fixed;
   top: 0;
   width: 100%;
