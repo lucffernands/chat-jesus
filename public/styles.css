@@ -48,12 +48,10 @@ header h1 {
 .menu-back {
   display: flex;
   justify-content: space-between;
-  background-color: red;
 }
 
 .menuSide-btn {
-  color: black;
-  background-color: orange;
+  
 }
 
 .side-menu {
