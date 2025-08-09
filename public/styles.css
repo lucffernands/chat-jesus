@@ -1,4 +1,8 @@
-/* Imagem de fundo*/
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: url('https://raw.githubusercontent.com/lucffernands/chat-jesus/main/public/image-bkg-ceu.jpeg') no-repeat center center fixed;
@@ -7,12 +11,78 @@ body {
   padding: 0;
 }
 
-/* Caixa principal */
+/* Cabeçalho com menu */
+header {
+  background-color: #8b0000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1002;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Botão hambúrguer */
+.menu-btn {
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Menu lateral */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu h3 {
+  margin-top: 0;
+  color: #8b0000;
+}
+
+.side-menu label {
+  display: block;
+  margin: 12px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.side-menu input[type="checkbox"],
+.side-menu input[type="radio"] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* Container principal */
 .container {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 80px auto 40px auto;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.6); /* fundo branco com transparência */
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
@@ -34,16 +104,19 @@ h1 {
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Formulário */
 form {
   text-align: center;
   margin-top: 20px;
-  padding: 20px; /* Para ajudar na centralização */
+  padding: 20px;
 }
 
-input[type="text"] {
+input[type='text'] {
   padding: 10px;
   width: 90%;
   max-width: 400px;
@@ -65,41 +138,37 @@ button {
   min-width: 100px;
   max-width: 150px;
   flex: 1;
-  background: rgba(173, 216, 230, 0.7); /* azul claro transparente */
+  background: rgba(173, 216, 230, 0.7);
   border: none;
-  border-radius: 50px; /* formato de nuvem */
+  border-radius: 50px;
   padding: 10px 20px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  color: #003366; /* azul escuro para o texto */
-  box-shadow: 2px 4px 6px rgba(0,0,0,0.2),
-  inset 1px 1px 2px rgba(255,255,255,0.5);
+  color: #003366;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5);
   transition: all 0.2s ease-in-out;
-  backdrop-filter: blur(4px); /* efeito vidro */
+  backdrop-filter: blur(4px);
 }
 
 button:hover {
   background-color: #003cb3;
 }
 
-/* Remove o destaque azul ao tocar no botão no celular */
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
 button:active {
-  background-color: #3e8e41; /* cor quando clica */
-  transform: scale(0.97); /* leve efeito de "apertar" */
+  background-color: #3e8e41;
+  transform: scale(0.97);
 }
 
 button:focus {
-  outline: none; /* remove borda azul padrão */
-  box-shadow: 0 0 5px rgba(72, 239, 128, 0.7); /* brilho suave */
+  outline: none;
+  box-shadow: 0 0 5px rgba(72, 239, 128, 0.7);
 }
 
 /* Mensagens */
-.user, .jesus {
+.user,
+.jesus {
   margin: 10px 0;
   padding: 10px 15px;
   border-radius: 16px;
@@ -121,10 +190,10 @@ button:focus {
 }
 
 .jesus strong {
-  color: #8B0000;
+  color: #8b0000;
 }
 
-/* Carregamento */
+/* Loading */
 .loading {
   display: none;
   align-items: center;
@@ -137,7 +206,7 @@ button:focus {
   font-size: 1rem;
   font-weight: 500;
   margin-top: 15px;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); /* brilho dourado */
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
   text-align: center;
   animation: glow 2s ease-in-out infinite;
 }
@@ -152,32 +221,30 @@ button:focus {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes glow {
-  0% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
-  50% { box-shadow: 0 0 16px rgba(255, 215, 0, 0.7); }
-  100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
+  0% {
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  }
 }
 
-/*Responsivo*/
-#response {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f1f1f1;
-  border-radius: 15px;
-  white-space: pre-wrap;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-/* Responsivo para telas menores */
+/* Responsivo */
 @media (max-width: 600px) {
   .container {
     margin: 20px;
     padding: 15px;
   }
-  }
-    
+}
