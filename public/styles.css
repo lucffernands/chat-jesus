@@ -49,11 +49,12 @@ header h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: red;
 }
 
 .menuSide-btn {
-  padding-botton: 20px
-  color: #8b0000;
+  color: black;
+  background-color: orange;
 }
 
 .side-menu {
