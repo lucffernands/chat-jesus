@@ -11,11 +11,12 @@ body {
   padding: 0;
 }
 
+/* Cabeçalho com menu */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 10px 20px 10px 15px;
   background-color: #8b0000;
   color: white;
   position: fixed;
@@ -38,35 +39,6 @@ header h2 {
   margin: 0;
   font-size: 20px;
 }
-
-/* Cabeçalho com menu 
-header {
-  background-color: #8b0000;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1002;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-header h2 {
-  margin: 0;
-  font-size: 20px;
-}
-
-/* Botão hambúrguer 
-.menu-btn {
-  font-size: 28px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-} */
 
 /* Menu lateral */
 .side-menu {
