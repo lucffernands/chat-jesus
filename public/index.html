@@ -8,17 +8,19 @@
 </head>
 <body>
   <header>
-    <button class="menu-btn" aria-label="Abrir menu" onclick="toggleMenu()">☰</button>
-    <h1>Converse com Jesus</h1>
-  </header>
+  <!-- Botão hambúrguer -->
+  <button class="menu-btn" aria-label="Abrir menu" onclick="toggleMenu()">☰</button>
+  <h1>Converse com Jesus</h1>
+</header>
 
-  <!-- Menu lateral -->
+<!-- Menu lateral -->
 <nav id="sideMenu" class="side-menu" aria-hidden="true">
+  <!-- Botão seta para fechar -->
   <button id="closeMenuBtn" class="close-menu-btn" aria-label="Fechar menu">←</button>
   <h3>Configurações</h3>
   
   <label>
-    <input type="checkbox" id="voiceToggle" checked />
+    <input type="checkbox" id="voiceToggle" />
     Ativar voz
   </label>
   <label>
@@ -26,11 +28,10 @@
     Voz masculina
   </label>
   <label>
-    <input type="radio" name="voiceType" value="female" checked />
+    <input type="radio" name="voiceType" value="female" />
     Voz feminina
   </label>
 </nav>
-
   <div class="container">
     <div class="chat-box" id="chat-box"></div>
 
