@@ -21,7 +21,7 @@ header {
   color: white;
   font-size: 24px;
   font-weight: bold;
-  text-shadow: lightgrey;
+  text-shadow: grey;
   position: fixed;
   top: 0;
   width: 100%;
@@ -45,6 +45,7 @@ header h1 {
 
 /* Menu lateral */
 .side-menu {
+  background-color: ligthgrey;
   position: fixed;
   top: 0;
   right: -260px;
