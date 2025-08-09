@@ -83,6 +83,22 @@ header h1 {
   cursor: pointer;
 }
 
+/* Botão de fechar (seta para a esquerda) */
+.close-menu-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-menu-btn:hover {
+  color: #000;
+}
+
 /* Container principal */
 .container {
   max-width: 600px;
