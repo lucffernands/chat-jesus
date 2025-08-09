@@ -88,14 +88,6 @@ header h2 {
   backdrop-filter: blur(8px);
 }
 
-/* Título */
-h1 {
-  text-align: center;
-  color: #333;
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
 /* Caixa de conversa */
 .chat-box {
   overflow-y: auto;
