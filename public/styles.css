@@ -48,6 +48,7 @@ header h1 {
 .menu-back {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .side-menu {
