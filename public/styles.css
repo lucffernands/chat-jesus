@@ -28,6 +28,7 @@ header {
 .menu-btn {
   left: 15px;
   font-size: 28px;
+  padding: 5px 8px;
   background: none;
   border: none;
   color: white;
