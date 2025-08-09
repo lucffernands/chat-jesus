@@ -47,7 +47,6 @@ header h1 {
 /* Menu lateral */
 .menu-back {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: red;
 }
