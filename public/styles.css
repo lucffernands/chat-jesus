@@ -154,7 +154,7 @@ input[type='text'] {
   margin-top: 12px;
 }
 
-button {
+.chat-btn {
   min-width: 100px;
   max-width: 150px;
   flex: 1;
@@ -172,16 +172,16 @@ button {
   backdrop-filter: blur(4px);
 }
 
-button:hover {
+.chat-btn:hover {
   background-color: #003cb3;
 }
 
-button:active {
+.chat-btn:active {
   background-color: #3e8e41;
   transform: scale(0.97);
 }
 
-button:focus {
+.chat-btn:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(72, 239, 128, 0.7);
 }
