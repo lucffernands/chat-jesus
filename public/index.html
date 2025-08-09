@@ -1,6 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta charset="UTF-8" />
+  <title>Converse com Jesus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h2>Converse com Jesus</h2>
+    <button class="menu-btn" aria-label="Abrir menu" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <!-- Menu lateral -->
+  <nav id="sideMenu" class="side-menu" aria-hidden="true">
+    <h3>Configurações</h3>
+    <label>
+      <input type="checkbox" id="voiceToggle" checked />
+      Ativar voz
+    </label>
+    <label>
+      <input type="radio" name="voiceType" value="male" />
+      Voz masculina
+    </label>
+    <label>
+      <input type="radio" name="voiceType" value="female" checked />
+      Voz feminina
+    </label>
+  </nav>
+
+  <div class="container">
+    <h1>Converse com Jesus</h1>
+    <div class="chat-box" id="chat-box"></div>
+
+    <form id="chat-form">
+      <input
+        type="text"
+        id="message-input"
+        placeholder="Digite sua mensagem..."
+        required
+      />
+      <div class="button-group">
+        <button type="submit">Enviar</button>
+        <button type="button" id="voice-btn" aria-label="Falar com Jesus">
+          Fale
+        </button>
+      </div>
+    </form>
+
+    <div class="loading" id="loading" style="display: none;">
+      <div class="spinner"></div>
+      <span><strong>Jesus</strong> quer falar com você...</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
   <meta charset="UTF-8">
   <title>Converse com Jesus</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
