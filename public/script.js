@@ -185,3 +185,56 @@ if ("serviceWorker" in navigator) {
     .then(() => console.log("Service Worker registrado com sucesso."))
     .catch(err => console.error("Erro ao registrar Service Worker:", err));
 }
+
+// Pop-up para instalar aplicativo via Chrome
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Cria overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'pwa-install-overlay';
+
+  // Cria popup
+  const popup = document.createElement('div');
+  popup.className = 'pwa-install-popup';
+
+  // Título
+  const title = document.createElement('h2');
+  title.textContent = 'Instalar Aplicativo';
+
+  // Mensagem
+  const message = document.createElement('p');
+  message.textContent = 'Adicione este app à tela inicial para acesso rápido!';
+
+  // Botão instalar
+  const installBtn = document.createElement('button');
+  installBtn.textContent = '📲 Instalar Agora';
+  installBtn.className = 'pwa-install-btn';
+
+  // Botão fechar
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = '❌ Fechar';
+  closeBtn.className = 'pwa-close-btn';
+
+  popup.appendChild(title);
+  popup.appendChild(message);
+  popup.appendChild(installBtn);
+  popup.appendChild(closeBtn);
+  overlay.appendChild(popup);
+  document.body.appendChild(overlay);
+
+  installBtn.addEventListener('click', async () => {
+    overlay.remove();
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`Usuário escolheu: ${outcome}`);
+    deferredPrompt = null;
+  });
+
+  closeBtn.addEventListener('click', () => {
+    overlay.remove();
+  });
+});
