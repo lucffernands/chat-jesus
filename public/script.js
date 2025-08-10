@@ -277,3 +277,39 @@ if (pwaButtons && isStandalone()) {
   // Se não for PWA, remove os botões
   pwaButtons.remove();
 }
+
+// Função para detectar se está em PWA
+function isPWA() {
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true ||
+    document.referrer.startsWith('android-app://')
+  );
+}
+
+if (isPWA()) {
+  const containerBotoes = document.createElement('div');
+  containerBotoes.classList.add('pwa-footer-buttons');
+
+  const btnLimpar = document.createElement('button');
+  btnLimpar.textContent = 'Limpar Chat';
+  btnLimpar.classList.add('pwa-btn', 'limpar-chat');
+  btnLimpar.onclick = () => {
+    if (confirm('Tem certeza que deseja limpar o chat?')) {
+      const chatBox = document.getElementById('chat-box');
+      if (chatBox) chatBox.innerHTML = '';
+    }
+  };
+
+  const btnFechar = document.createElement('button');
+  btnFechar.textContent = 'Fechar';
+  btnFechar.classList.add('pwa-btn', 'fechar-app');
+  btnFechar.onclick = () => {
+    window.close();
+  };
+
+  containerBotoes.appendChild(btnLimpar);
+  containerBotoes.appendChild(btnFechar);
+  document.body.appendChild(containerBotoes);
+}
+
