@@ -4,9 +4,18 @@
   <meta charset="UTF-8" />
   <title>Converse com Jesus</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- CSS externo -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Manifest para instalação como app -->
   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2c3e50">
+  <meta name="theme-color" content="#2c3e50">
+
+  <!-- Ícones para atalho na tela inicial -->
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
 </head>
 <body>
   <header>
@@ -18,7 +27,7 @@
   <nav id="sideMenu" class="side-menu" aria-hidden="true">
     <div class="menu-back">
       <h3>Configurações</h3>
-      <button class="menuSide-btn" aria-label="Abrir menu" onclick="toggleMenu()">&#x25B6</button>
+      <button class="menuSide-btn" aria-label="Fechar menu" onclick="toggleMenu()">&#x25B6;</button>
     </div>
     <label>
       <input type="checkbox" id="voiceToggle" checked />
@@ -58,6 +67,14 @@
     </div>
   </div>
 
+  <!-- JS externo -->
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registrado com sucesso!'))
+        .catch(err => console.error('Erro ao registrar Service Worker:', err));
+    }
+  </script>
 </body>
 </html>
