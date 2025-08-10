@@ -238,3 +238,38 @@ window.addEventListener('beforeinstallprompt', (e) => {
     overlay.remove();
   });
 });
+
+function isStandalone() {
+  return (window.matchMedia('(display-mode: standalone)').matches) ||
+         (window.navigator.standalone === true);
+}
+
+const chatBox = document.getElementById('chat-box');
+const pwaButtons = document.querySelector('.pwa-buttons');
+
+// Só ativa se for PWA
+if (isStandalone()) {
+  // Mostrar botões apenas quando rolar até o final
+  window.addEventListener('scroll', () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+      pwaButtons.classList.add('show');
+    } else {
+      pwaButtons.classList.remove('show');
+    }
+  });
+
+  // Limpar chat
+  document.getElementById('btn-clear').addEventListener('click', () => {
+    if (chatBox) {
+      chatBox.innerHTML = '';
+    }
+  });
+
+  // Fechar app
+  document.getElementById('btn-close').addEventListener('click', () => {
+    window.close();
+  });
+} else {
+  // Se não for PWA, remove os botões
+  pwaButtons.remove();
+}
