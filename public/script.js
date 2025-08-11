@@ -200,6 +200,10 @@ window.addEventListener("beforeinstallprompt", (e) => {
   installPopup.style.display = "block"; // Mostra pop-up
 });
 
+// Mostra o pop-up customizado
+  overlay.style.display = 'flex';
+});
+
 // Ao clicar em instalar
 btnInstall.addEventListener("click", () => {
   installPopup.style.display = "none";
