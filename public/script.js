@@ -192,22 +192,19 @@ let deferredPrompt;
 const installPopup = document.getElementById("installPopup");
 const btnInstall = document.getElementById("btnInstall");
 const btnClose = document.getElementById("btnClose");
+const overlay = document.getElementById("overlay");
 
-// Captura o evento "beforeinstallprompt"
 window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault(); // Evita o prompt automático
-  deferredPrompt = e; // Salva o evento para usar depois
-  installPopup.style.display = "block"; // Mostra pop-up
+  e.preventDefault();
+  deferredPrompt = e;
+  overlay.style.display = "block";
+  installPopup.style.display = "block";
 });
 
-// Mostra o pop-up customizado
-  overlay.style.display = 'flex';
-});
-
-// Ao clicar em instalar
 btnInstall.addEventListener("click", () => {
   installPopup.style.display = "none";
-  deferredPrompt.prompt(); // Mostra prompt oficial
+  overlay.style.display = "none";
+  deferredPrompt.prompt();
   deferredPrompt.userChoice.then((choiceResult) => {
     if (choiceResult.outcome === "accepted") {
       console.log("Usuário instalou o app");
@@ -218,7 +215,7 @@ btnInstall.addEventListener("click", () => {
   });
 });
 
-// Ao clicar em fechar
 btnClose.addEventListener("click", () => {
   installPopup.style.display = "none";
+  overlay.style.display = "none";
 });
