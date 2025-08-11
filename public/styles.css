@@ -344,3 +344,47 @@ input[type='text'] {
     padding: 15px;
   }
 }
+
+.pwa-footer-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+}
+
+.pwa-btn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.pwa-btn.limpar-chat {
+  color: #007bff;
+}
+
+.pwa-btn.limpar-chat:hover {
+  background-color: #e6f0ff;
+}
+
+.pwa-btn.fechar-app {
+  color: #dc3545;
+}
+
+.pwa-btn.fechar-app:hover {
+  background-color: #f8d7da;
+}
