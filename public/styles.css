@@ -253,44 +253,48 @@ input[type='text'] {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+  background: rgba(0,0,0,0.6);
+  z-index: 9998;
 }
 
-/* Caixa do pop-up */
+/* Pop-up centralizado */
 .install-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   text-align: center;
+  z-index: 9999;
   max-width: 300px;
   width: 90%;
 }
 
-.install-popup p {
-  font-size: 16px;
-  margin-bottom: 15px;
+.install-popup h3 {
+  margin-bottom: 10px;
+}
+
+.install-popup .buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .install-popup button {
-  margin: 5px;
-  padding: 10px 20px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
 }
 
-#installBtn {
+#btnInstall {
   background: #4CAF50;
   color: white;
 }
 
-#closeInstall {
+#btnDismiss {
   background: #ccc;
-  color: black;
 }
