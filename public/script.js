@@ -189,33 +189,32 @@ if ("serviceWorker" in navigator) {
 
 // Pop-up de instalação de app pelo navegador 
 let deferredPrompt;
-const installPopup = document.getElementById("installPopup");
-const btnInstall = document.getElementById("btnInstall");
-const btnClose = document.getElementById("btnClose");
-const overlay = document.getElementById("overlay");
+const installPopup = document.getElementById('installPopup');
+const installOverlay = document.getElementById('installOverlay');
+const btnInstall = document.getElementById('btnInstall');
+const btnDismiss = document.getElementById('btnDismiss');
 
-window.addEventListener("beforeinstallprompt", (e) => {
+window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  overlay.style.display = "block";
-  installPopup.style.display = "block";
+
+  // Mostra pop-up e fundo escurecido
+  installPopup.style.display = 'block';
+  installOverlay.style.display = 'block';
 });
 
-btnInstall.addEventListener("click", () => {
-  installPopup.style.display = "none";
-  overlay.style.display = "none";
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.then((choiceResult) => {
-    if (choiceResult.outcome === "accepted") {
-      console.log("Usuário instalou o app");
-    } else {
-      console.log("Usuário recusou o app");
-    }
-    deferredPrompt = null;
-  });
+btnInstall.addEventListener('click', () => {
+  installPopup.style.display = 'none';
+  installOverlay.style.display = 'none';
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
+  }
 });
 
-btnClose.addEventListener("click", () => {
-  installPopup.style.display = "none";
-  overlay.style.display = "none";
+btnDismiss.addEventListener('click', () => {
+  installPopup.style.display = 'none';
+  installOverlay.style.display = 'none';
 });
