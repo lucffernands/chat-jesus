@@ -218,3 +218,23 @@ btnDismiss.addEventListener('click', () => {
   installPopup.style.display = 'none';
   installOverlay.style.display = 'none';
 });
+
+// ==== NOVO CÓDIGO PARA FECHAR O MENU COM "X" E CLIQUE FORA ====
+
+// Botão "X" no menu lateral
+const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+if (closeMenuBtn) {
+  closeMenuBtn.addEventListener('click', () => {
+    sideMenu.classList.remove('open');
+  });
+}
+
+// Fecha o menu ao clicar fora
+document.addEventListener('click', (event) => {
+  if (sideMenu.classList.contains('open')) {
+    if (!sideMenu.contains(event.target) && !event.target.closest('.menu-btn')) {
+      sideMenu.classList.remove('open');
+    }
+  }
+});
