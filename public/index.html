@@ -9,25 +9,22 @@
   <link rel="stylesheet" href="styles.css" />
 
   <!-- Manifest para instalação como app -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#2c3e50">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2c3e50" />
 
   <!-- Ícones para atalho na tela inicial -->
-  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
 </head>
 <body>
   <header>
-    <button class="menu-btn" aria-label="Abrir menu" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" aria-label="Abrir menu" onclick="toggleMenu()" aria-expanded="false" aria-controls="sideMenu">☰</button>
     <h1>Converse com Jesus</h1>
   </header>
 
   <!-- Menu lateral -->
-  <nav id="sideMenu" class="side-menu" aria-hidden="true">
-    <div class="menu-back">
-      <h3>Configurações</h3>
-    </div>
+  <nav id="sideMenu" class="side-menu" aria-hidden="true" aria-label="Configurações">
+    <h3>Configurações</h3>
     <label>
       <input type="checkbox" id="voiceToggle" checked />
       Ativar voz
@@ -42,8 +39,8 @@
     </label>
   </nav>
 
-  <div class="container">
-    <div class="chat-box" id="chat-box"></div>
+  <main class="container">
+    <div class="chat-box" id="chat-box" role="log" aria-live="polite" aria-relevant="additions"></div>
 
     <form id="chat-form">
       <input
@@ -51,6 +48,8 @@
         id="message-input"
         placeholder="Digite sua mensagem..."
         required
+        autocomplete="off"
+        aria-label="Mensagem para Jesus"
       />
       <div class="button-group">
         <button class="chat-btn" type="submit">Enviar</button>
@@ -61,10 +60,10 @@
     </form>
 
     <div class="loading" id="loading" style="display: none;">
-      <div class="spinner"></div>
+      <div class="spinner" aria-hidden="true"></div>
       <span><strong>Jesus</strong> quer falar com você...</span>
     </div>
-  </div>
+  </main>
 
   <!-- JS externo -->
   <script src="script.js"></script>
@@ -75,6 +74,5 @@
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
     }
   </script>
-
 </body>
 </html>
