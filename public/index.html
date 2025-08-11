@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="styles.css" />
 
   <!-- Manifest para instalação como app -->
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#2c3e50" />
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0078d7">
 
   <!-- Ícones para atalho na tela inicial -->
   <link rel="icon" href="icons/icon-192.png" sizes="192x192" />
@@ -64,6 +64,15 @@
       <span><strong>Jesus</strong> quer falar com você...</span>
     </div>
   </main>
+
+  <!-- Pop-up de instalação -->
+<div id="installPopup" class="install-popup" style="display:none;">
+  <div class="install-content">
+    <p>Deseja instalar este app?</p>
+    <button id="btnInstall">Instalar</button>
+    <button id="btnClose">Agora não</button>
+  </div>
+</div>
 
   <!-- JS externo -->
   <script src="script.js"></script>
