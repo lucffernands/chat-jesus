@@ -24,7 +24,12 @@
 
   <!-- Menu lateral -->
   <nav id="sideMenu" class="side-menu" aria-hidden="true" aria-label="Configurações">
+    <div class="menu-header">
     <h3>Configurações</h3>
+    <button id="closeMenuBtn" class="close-btn" aria-label="Fechar menu">
+      &times;
+    </button>
+  </div>
     <label>
       <input type="checkbox" id="voiceToggle" checked />
       Ativar voz
@@ -38,6 +43,9 @@
       Voz feminina
     </label>
   </nav>
+
+  <!-- Overlay escuro -->
+  <div id="overlay"></div>
 
   <main class="container">
     <div class="chat-box" id="chat-box" role="log" aria-live="polite" aria-relevant="additions"></div>
