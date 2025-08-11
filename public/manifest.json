@@ -3,8 +3,8 @@
   "short_name": "Chat com Jesus",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "1e1e1e",
-  "theme_color": "#0078d7",
+  "background_color": "#1e1e1e",
+  "theme_color": "#1e1e1e",
   "icons": [
     {
       "src": "icons/pray-128x.png",
