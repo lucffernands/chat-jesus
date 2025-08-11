@@ -89,7 +89,8 @@ header h1 {
   border: none;
   cursor: pointer;
   padding: 0;
-  color: #333; /* mesma cor do texto */
+  color: #8b0000;
+  font-weight: bold;
 }
 
 #closeMenuBtn:hover {
