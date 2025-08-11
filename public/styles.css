@@ -87,8 +87,20 @@ header h1 {
 #closeMenuBtn {
   background: none;
   border: none;
-  cursor: pointer;
   padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#closeMenuBtn img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+#closeMenuBtn:hover img {
+  opacity: 0.8;
 }
 
 /* Labels e inputs */
