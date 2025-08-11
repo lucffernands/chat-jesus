@@ -186,7 +186,7 @@ if ("serviceWorker" in navigator) {
     .catch(err => console.error("Erro ao registrar Service Worker:", err));
 }
 
-// Pop-up para instalar aplicativo via Chrome
+// Pop-up para instalar aplicativo via Navegador
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -209,6 +209,10 @@ window.addEventListener('beforeinstallprompt', (e) => {
   const message = document.createElement('p');
   message.textContent = 'Adicione este app à tela inicial para acesso rápido!';
 
+  // Container para os botões
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.className = 'pwa-install-buttons';
+
   // Botão instalar
   const installBtn = document.createElement('button');
   installBtn.textContent = '📲 Instalar Agora';
@@ -219,13 +223,22 @@ window.addEventListener('beforeinstallprompt', (e) => {
   closeBtn.textContent = '❌ Fechar';
   closeBtn.className = 'pwa-close-btn';
 
+  // Adiciona os botões no container
+  buttonsDiv.appendChild(installBtn);
+  buttonsDiv.appendChild(closeBtn);
+
+  // Monta popup
   popup.appendChild(title);
   popup.appendChild(message);
-  popup.appendChild(installBtn);
-  popup.appendChild(closeBtn);
+  popup.appendChild(buttonsDiv);
+
+  // Adiciona popup no overlay
   overlay.appendChild(popup);
+
+  // Adiciona overlay no body
   document.body.appendChild(overlay);
 
+  // Evento clicar em instalar
   installBtn.addEventListener('click', async () => {
     overlay.remove();
     deferredPrompt.prompt();
@@ -234,8 +247,8 @@ window.addEventListener('beforeinstallprompt', (e) => {
     deferredPrompt = null;
   });
 
+  // Evento clicar em fechar
   closeBtn.addEventListener('click', () => {
     overlay.remove();
   });
 });
-
