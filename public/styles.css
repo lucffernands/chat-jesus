@@ -40,7 +40,7 @@ header {
 header h1 {
   margin: 0;
   font-size: 20px;
-  color: wight;
+  color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* sombra suave */
 }
 
@@ -238,6 +238,14 @@ input[type='text'] {
   }
 }
 
+/* Cabeçalho com menu */
+header h1 {
+  margin: 0;
+  font-size: 20px;
+  color: white; /* corrigido 'wight' para 'white' */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* sombra suave */
+}
+
 /* Instalar app via Navegador*/
 /* Fundo escurecido do popup */
 .pwa-install-overlay {
@@ -274,13 +282,24 @@ input[type='text'] {
   margin-bottom: 20px;
 }
 
+/* Botões - container flex para alinhamento lado a lado e centralizado */
+.pwa-install-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 /* Botões */
 .pwa-install-btn, .pwa-close-btn {
-  padding: 10px 15px;
+  padding: 10px 20px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  margin-right: 10px;
+  flex: 1;  /* para os botões terem largura igual */
+  max-width: 130px;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
 .pwa-install-btn {
@@ -288,9 +307,32 @@ input[type='text'] {
   color: #fff;
 }
 
+.pwa-install-btn:hover {
+  background: #155a9c;
+}
+
 .pwa-close-btn {
   background: #ccc;
   color: #000;
+}
+
+.pwa-close-btn:hover {
+  background: #999;
+}
+
+  
+/* Pop-up largura ajustada no mobile */
+.pwa-install-popup {
+  max-width: 90%;
+}
+  
+.pwa-install-buttons {
+  flex-direction: column;
+}
+
+.pwa-install-btn, .pwa-close-btn {
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 
 /* Responsivo */
