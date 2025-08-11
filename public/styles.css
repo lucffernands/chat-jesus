@@ -89,13 +89,6 @@ header h1 {
   border: none;
   cursor: pointer;
   padding: 0;
-  color: #8b0000;
-  font-weight: bold;
-  font-size: 50px;
-}
-
-#closeMenuBtn:hover {
-  color: #8b0000; /* cor ao passar o mouse */
 }
 
 /* Labels e inputs */
