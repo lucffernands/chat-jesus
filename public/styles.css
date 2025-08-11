@@ -239,48 +239,58 @@ input[type='text'] {
 }
 
 /* Instalar app via Navegador*/
-.pwa-footer-buttons {
+/* Fundo escurecido do popup */
+.pwa-install-overlay {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
   display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 99999;
-  font-family: Arial, sans-serif;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
 }
 
-.pwa-btn {
-  background: transparent;
+/* Caixa branca do popup */
+.pwa-install-popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Título */
+.pwa-install-popup h2 {
+  margin-bottom: 10px;
+}
+
+/* Texto */
+.pwa-install-popup p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Botões */
+.pwa-install-btn, .pwa-close-btn {
+  padding: 10px 15px;
+  border-radius: 5px;
   border: none;
-  font-size: 16px;
   cursor: pointer;
-  font-weight: bold;
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-  user-select: none;
+  margin-right: 10px;
 }
 
-.pwa-btn.limpar-chat {
-  color: #007bff;
+.pwa-install-btn {
+  background: #1976d2;
+  color: #fff;
 }
 
-.pwa-btn.limpar-chat:hover {
-  background-color: #e6f0ff;
-}
-
-.pwa-btn.fechar-app {
-  color: #dc3545;
-}
-
-.pwa-btn.fechar-app:hover {
-  background-color: #f8d7da;
+.pwa-close-btn {
+  background: #ccc;
+  color: #000;
 }
 
 /* Responsivo */
