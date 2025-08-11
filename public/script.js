@@ -185,3 +185,36 @@ if ("serviceWorker" in navigator) {
     .then(() => console.log("Service Worker registrado com sucesso."))
     .catch(err => console.error("Erro ao registrar Service Worker:", err));
 }
+
+
+// Pop-up de instalação de app pelo navegador 
+let deferredPrompt;
+const installPopup = document.getElementById("installPopup");
+const btnInstall = document.getElementById("btnInstall");
+const btnClose = document.getElementById("btnClose");
+
+// Captura o evento "beforeinstallprompt"
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault(); // Evita o prompt automático
+  deferredPrompt = e; // Salva o evento para usar depois
+  installPopup.style.display = "block"; // Mostra pop-up
+});
+
+// Ao clicar em instalar
+btnInstall.addEventListener("click", () => {
+  installPopup.style.display = "none";
+  deferredPrompt.prompt(); // Mostra prompt oficial
+  deferredPrompt.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === "accepted") {
+      console.log("Usuário instalou o app");
+    } else {
+      console.log("Usuário recusou o app");
+    }
+    deferredPrompt = null;
+  });
+});
+
+// Ao clicar em fechar
+btnClose.addEventListener("click", () => {
+  installPopup.style.display = "none";
+});
