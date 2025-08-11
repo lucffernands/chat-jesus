@@ -245,3 +245,34 @@ input[type='text'] {
     padding: 15px;
   }
 }
+
+.install-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  font-family: sans-serif;
+}
+
+.install-popup p {
+  margin: 0 0 10px;
+}
+
+.install-popup button {
+  margin-right: 5px;
+  padding: 6px 12px;
+  border: none;
+  background: #0078ff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.install-popup button:last-child {
+  background: #ccc;
+  color: black;
+}
