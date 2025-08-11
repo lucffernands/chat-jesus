@@ -167,36 +167,24 @@ voiceRadios.forEach(radio => {
   });
 });
 
-// Função para abrir/fechar o menu lateral e trocar o ícone
 function toggleMenu() {
   sideMenu.classList.toggle('open');
-
-  const btn = document.querySelector('.menuSide-btn');
-  const isOpen = sideMenu.classList.contains('open');
-
-  // Seta esquerda (menu aberto) ou direita (menu fechado)
-  btn.innerHTML = isOpen
-    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-         <polyline points="15 18 9 12 15 6" />
-       </svg>`
-    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-         <polyline points="9 18 15 12 9 6" />
-       </svg>`;
 }
 
-// Detecta clique fora do menu para fechar
-document.addEventListener('click', function(event) {
-  if (!sideMenu.contains(event.target) && !event.target.closest('.menuSide-btn')) {
-    sideMenu.classList.remove('open');
-    const btn = document.querySelector('.menuSide-btn');
-    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-         <polyline points="9 18 15 12 9 6" />
-       </svg>`;
-  }
-});
+window.onload = () => {
+  loadSettings();
+
+  // Para garantir que as vozes estejam carregadas, força atualização
+  if ('speechSynthesis' in window) {
+    speechSynthesis.onvoiceschanged = () => {};
+  };
+};
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js")
+    .then(() => console.log("Service Worker registrado com sucesso."))
+    .catch(err => console.error("Erro ao registrar Service Worker:", err));
+}
 
 // Pop-up para instalar aplicativo via Chrome
 let deferredPrompt;
