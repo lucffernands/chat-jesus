@@ -296,5 +296,6 @@ input[type='text'] {
 }
 
 #btnDismiss {
-  background: grey;
+  background: #1e1e1e;
+  color: white;
 }
