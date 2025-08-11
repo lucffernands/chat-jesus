@@ -63,11 +63,37 @@ header h1 {
   right: 0;
 }
 
-.side-menu h3 {
-  color: #8b0000;
-  font-weight: bold;
+/* Cabeçalho do menu */
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
+.menu-header h3 {
+  color: #8b0000;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Botão de fechar "X" */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #8b0000; /* mesmo tom do título */
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #b22222; /* vermelho um pouco mais claro no hover */
+}
+
+/* Labels e inputs */
 .side-menu label {
   display: block;
   margin: 12px 0;
@@ -80,6 +106,22 @@ header h1 {
 .side-menu input[type="radio"] {
   margin-right: 8px;
   cursor: pointer;
+}
+
+/* Overlay para clique fora */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+#overlay.active {
+  display: block;
 }
 
 /* Container principal */
