@@ -78,19 +78,22 @@ header h1 {
 }
 
 /* Botão de fechar "X" */
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  color: #8b0000; /* mesmo tom do título */
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-  transition: color 0.2s ease;
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.close-btn:hover {
-  color: #b22222; /* vermelho um pouco mais claro no hover */
+#closeMenuBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #333; /* mesma cor do texto */
+}
+
+#closeMenuBtn:hover {
+  color: #8b0000; /* cor ao passar o mouse */
 }
 
 /* Labels e inputs */
