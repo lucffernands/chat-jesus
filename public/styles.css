@@ -98,7 +98,7 @@ header h1 {
   width: 24px;
   height: 24px;
   /* filtro aproximado do tom #8b0000 */
-  filter: sepia(1) saturate(7) hue-rotate(-10deg) brightness(0.5) contrast(1.07);
+  filter: sepia(1) saturate(7) hue-rotate(-10deg) brightness(0.7) contrast(1.04);
 }
 
 #closeMenuBtn:hover img {
